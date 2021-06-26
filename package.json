@@ -4,6 +4,8 @@
   "description": "(Introduction, a bit bigger than description)",
   "main": "main.js",
   "scripts": {
+    "start": "electron .",
+    "style": "sass --watch sass:public/styles",
     "test": "mocha"
   },
   "repository": {
@@ -17,13 +19,10 @@
   },
   "homepage": "https://github.com/ChakradharG/CV-Tracker#readme",
   "devDependencies": {
-    "eslint": "^7.28.0",
-    "eslint-plugin-react": "^7.24.0",
+    "eslint": "^7.29.0",
     "mocha": "^9.0.0"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
-  },
-  "type": "module"
+    "electron": "^13.1.4"
+  }
 }
