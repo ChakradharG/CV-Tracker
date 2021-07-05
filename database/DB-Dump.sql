@@ -1,69 +1,81 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
+
+DROP TABLE IF EXISTS `education`;
 CREATE TABLE `education` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`institue` TEXT NOT NULL,
 	`gpa/%` REAL NOT NULL,
 	`duration` TEXT NOT NULL
 );
+
+DROP TABLE IF EXISTS `work experience`;
 CREATE TABLE `work experience` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`description` TEXT NOT NULL,
 	`duration` TEXT NOT NULL
 );
+
+DROP TABLE IF EXISTS `achievements`;
 CREATE TABLE `achievements` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`description` TEXT NOT NULL,
 	`duration` TEXT NOT NULL
 );
+
+DROP TABLE IF EXISTS `internships`;
 CREATE TABLE `internships` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`description` TEXT NOT NULL,
 	`duration` TEXT NOT NULL
 );
+
+DROP TABLE IF EXISTS `co-curricular activities`;
 CREATE TABLE `co-curricular activities` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`description` TEXT NOT NULL,
 	`duration` TEXT NOT NULL
 );
+
+DROP TABLE IF EXISTS `projects`;
 CREATE TABLE `projects` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`description` TEXT NOT NULL,
 	`duration` TEXT NOT NULL
 );
+
+DROP TABLE IF EXISTS `training/workshops`;
 CREATE TABLE `training/workshops` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`description` TEXT NOT NULL,
 	`duration` TEXT NOT NULL
 );
+
+DROP TABLE IF EXISTS `extra-curricular activities`;
 CREATE TABLE `extra-curricular activities` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`description` TEXT NOT NULL,
 	`duration` TEXT NOT NULL
 );
+
+DROP TABLE IF EXISTS `miscellaneous`;
 CREATE TABLE `miscellaneous` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`description` TEXT NOT NULL,
 	`duration` TEXT
 );
+
+DROP TABLE IF EXISTS `personal details`;
 CREATE TABLE `personal details` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`title` TEXT NOT NULL,
 	`description` TEXT NOT NULL
-	);
+);
+
+DROP TABLE IF EXISTS `skills/expertise`;
 CREATE TABLE `skills/expertise` (
-	`id` INTEGER PRIMARY KEY NOT NULL,
 	`domain` TEXT NOT NULL,
 	`title` TEXT NOT NULL,
 	`level` INTEGER NOT NULL
 );
+
 COMMIT;
