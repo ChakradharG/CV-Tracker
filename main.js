@@ -1,9 +1,12 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 
 let win;
+let DB;
+require('./database/helpers')().then((_DB) => { DB = _DB });
 require('electron-reload')(__dirname, {
 	electron: require(`${__dirname}/node_modules/electron`)
 });	// Remove
+
 
 function createWindow() {
 	win = new BrowserWindow({
