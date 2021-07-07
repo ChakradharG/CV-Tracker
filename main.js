@@ -10,12 +10,16 @@ require('electron-reload')(__dirname, {
 
 function createWindow() {
 	win = new BrowserWindow({
+		width: 900,
+		height: 550,
+		// frame: false,
 		webPreferences: {
 			preload: `${__dirname}/preload.js`
 		}
 	});
 
 	win.loadFile(`${__dirname}/public/index.html`);
+	win.removeMenu();	// Remove
 	win.webContents.openDevTools();	// Remove
 }
 
@@ -31,4 +35,8 @@ app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
 		app.quit();
 	}
+});
+
+ipcMain.handle('getData', () => {
+	return DB.getAll();
 });
