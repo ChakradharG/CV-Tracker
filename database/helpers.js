@@ -12,18 +12,18 @@ module.exports = async function () {
 
 	DB.getAll = async function() {
 		return {
-			ach: await this.db.all(`SELECT * FROM achievements`),
-			coc: await this.db.all(`SELECT * FROM cocurricular`),
-			edu: await this.db.all(`SELECT * FROM education`),
-			exp: await this.db.all(`SELECT * FROM experience`),
-			ext: await this.db.all(`SELECT * FROM extracurricular`),
-			int: await this.db.all(`SELECT * FROM internships`),
-			mis: await this.db.all(`SELECT * FROM miscellaneous`),
-			per: await this.db.all(`SELECT * FROM personal`),
-			pro: await this.db.all(`SELECT * FROM projects`),
-			ski: await this.db.all(`SELECT * FROM skills`),
-			tra: await this.db.all(`SELECT * FROM training`),
-		}
+			ach: await this.db.all('SELECT * FROM achievements'),
+			coc: await this.db.all('SELECT * FROM cocurricular'),
+			edu: await this.db.all('SELECT * FROM education'),
+			exp: await this.db.all('SELECT * FROM experience'),
+			ext: await this.db.all('SELECT * FROM extracurricular'),
+			int: await this.db.all('SELECT * FROM internships'),
+			mis: await this.db.all('SELECT * FROM miscellaneous'),
+			per: await this.db.all('SELECT * FROM personal'),
+			pro: await this.db.all('SELECT * FROM projects'),
+			ski: await this.db.all('SELECT * FROM skills'),
+			tra: await this.db.all('SELECT * FROM training'),
+		};
 	};
 
 	return DB;
