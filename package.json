@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "style": "sass --watch sass:public/styles",
+    "style": "sass --watch scss:public/styles",
     "test": "mocha"
   },
   "repository": {
