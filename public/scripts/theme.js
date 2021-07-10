@@ -1,3 +1,6 @@
+const root = document.querySelector(':root');
+
+
 function toggleTheme() {
 	const rootStyle = getComputedStyle(root);
 
@@ -22,7 +25,6 @@ function toggleTheme() {
 	localStorage.setItem('theme', theme);
 }
 
-const root = document.querySelector(':root');
 let theme = localStorage.getItem('theme');
 
 if ((!theme && window.matchMedia('(prefers-color-scheme: light)').matches) || theme === 'light') {
