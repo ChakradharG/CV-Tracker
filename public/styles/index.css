@@ -1,3 +1,9 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 :root {
   font-size: 16px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
@@ -5,12 +11,6 @@
   --bg-s: #4a089b;
   --fg: #f4ecfe;
   --fg-s: #d3b1fb;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -64,17 +64,6 @@ nav {
   animation: pop 0.25s;
 }
 
-@keyframes pop {
-  0% {
-    transform: scale(0%);
-  }
-  90% {
-    transform: scale(110%);
-  }
-  100% {
-    transform: scale(100%);
-  }
-}
 .theme {
   display: none;
   animation: pop 0.25s;
@@ -88,6 +77,17 @@ nav {
   display: block;
 }
 
+@keyframes pop {
+  0% {
+    transform: scale(0%);
+  }
+  90% {
+    transform: scale(110%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
 main {
   margin-left: 4rem;
 }
