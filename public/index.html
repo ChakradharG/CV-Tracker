@@ -4,11 +4,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="./styles/index.css">
+	<link rel="stylesheet" href="./styles/home.css">
+	<script defer src="./scripts/theme.js"></script>
+
 	<script src="./scripts/navigation/home.js"></script>
 	<script src="./scripts/navigation/timeline.js"></script>
 	<script src="./scripts/navigation/add.js"></script>
 	<script src="./scripts/navigation/export.js"></script>
-	<script defer src="./scripts/theme.js"></script>
+
+	<script>
+		let data;
+		window.api.invoke('getData').then((_data) => { data = _data }).then(renderHomeTab);
+	</script>
+
 	<title>CV Tracker</title>
 </head>
 <body>
