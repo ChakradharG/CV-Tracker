@@ -1,22 +1,11 @@
+@use './globals' as *;
+
+
 * {
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
 }
-
-:root {
-	font-size: 16px;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	--bg: #130227;
-	--bg-s: #4a089b;
-	--fg: #f4ecfe;
-	--fg-s: #d3b1fb;
-}
-
-$bg: var(--bg);
-$bg-s: var(--bg-s);
-$fg: var(--fg);
-$fg-s: var(--fg-s);
 
 body {
 	background-color: $bg;
