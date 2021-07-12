@@ -13,6 +13,7 @@ module.exports = async function () {
 
 	DB.getAll = async function() {
 		return {
+			abb: await this.db.all('SELECT * FROM abbreviations'),
 			ach: await this.db.all('SELECT * FROM achievements'),
 			coc: await this.db.all('SELECT * FROM cocurricular'),
 			edu: await this.db.all('SELECT * FROM education'),

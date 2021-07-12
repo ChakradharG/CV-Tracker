@@ -1,6 +1,12 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 
+DROP TABLE IF EXISTS `abbreviations`;
+CREATE TABLE `abbreviations` (
+	`sform` TEXT NOT NULL,
+	`fform` TEXT NOT NULL
+);
+
 DROP TABLE IF EXISTS `achievements`;
 CREATE TABLE `achievements` (
 	`title` TEXT NOT NULL,
