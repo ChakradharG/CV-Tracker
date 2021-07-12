@@ -4,46 +4,33 @@ function getSectionMap() {
 	}));
 }
 
-function newElem({ tagName, className, id, innerText, innerHTML }) {
-	let elem = document.createElement(tagName);
-
-	if (className) elem.className = className;
-	if (id) elem.id = id;
-	if (innerText) elem.innerText = innerText;
-	if (innerHTML) elem.innerHTML = innerHTML;
-
-	return elem;
-}
-
 function convert(element, section) {
-	let sectionDiv = newElem({ tagName: 'section' });
+	let sectionDiv = document.createElement('section');
 
-	sectionDiv.append(newElem({
-		tagName: 'h2',
-		innerText: section
-	}));
+	let sectionHeading = document.createElement('h2');
+	sectionHeading.innerText = section;
+
+	sectionDiv.append(sectionHeading);
 
 	let rows = element[1];
 	if (rows.length !== 0) {
-		let table = newElem({ tagName: 'table' });
+		let table = document.createElement('table');
 
-		let hRow = newElem({ tagName: 'tr' });	// Head
+		let hRow = document.createElement('tr');	// Head
 		Object.keys(rows[0]).forEach((col) => {
-			hRow.append(newElem({
-				tagName: 'th',
-				innerText: col
-			}));
+			let _ = document.createElement('th');
+			_.innerText = col;
+			hRow.append(_);
 		});
 		table.append(hRow);
 
 		let bRow;	// Body
 		rows.forEach((row) => {
-			bRow = newElem({ tagName: 'tr' });
+			bRow = document.createElement('tr');
 			Object.values(row).forEach((col) => {
-				bRow.append(newElem({
-					tagName: 'td',
-					innerHTML: col
-				}));
+				let _ = document.createElement('td');
+				_.innerHTML = col;
+				bRow.append(_);
 			});
 			table.append(bRow);
 		});
