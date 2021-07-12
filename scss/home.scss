@@ -1,0 +1,18 @@
+@use './globals' as *;
+
+
+table {
+	margin: 20px;
+	width: 90%;
+	&, th, td {
+		border: 1px solid $fg-s;
+		border-collapse: collapse;
+	}
+	th::first-letter {
+		text-transform: uppercase;
+	}
+}
+
+a {
+	color: $fg-s;
+}

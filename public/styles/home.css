@@ -1,0 +1,26 @@
+:root {
+  font-size: 16px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  --bg: #130227;
+  --bg-s: #4a089b;
+  --fg: #f4ecfe;
+  --fg-s: #d3b1fb;
+}
+
+table {
+  margin: 20px;
+  width: 90%;
+}
+table, table th, table td {
+  border: 1px solid var(--fg-s);
+  border-collapse: collapse;
+}
+table th::first-letter {
+  text-transform: uppercase;
+}
+
+a {
+  color: var(--fg-s);
+}
+
+/*# sourceMappingURL=home.css.map */
