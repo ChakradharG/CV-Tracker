@@ -1,16 +1,28 @@
-function getSectionMap() {
+function getAbbreviationMap() {
 	return new Map(data.abb.map(({ sform, fform }) => {
 		return [ sform, fform ];
 	}));
 }
 
-function convert(element, section) {
-	let sectionDiv = document.createElement('section');
+function parseDurationString(duration) {
+	[ from, to ] = duration.split(':').map((str) => {
+		return (new Date(str)).toDateString();
+	});
+
+	duration = `${from.slice(8, 10)} ${from.slice(4, 7)} ${from.slice(11, 15)}`;
+	if (to) {
+		duration += ` - ${to.slice(8, 10)} ${to.slice(4, 7)} ${to.slice(11, 15)}`;
+	}
+
+	return duration;
+}
+
+function constructSection(element, heading) {
+	let section = document.createElement('section');
 
 	let sectionHeading = document.createElement('h2');
-	sectionHeading.innerText = section;
-
-	sectionDiv.append(sectionHeading);
+	sectionHeading.innerText = heading;
+	section.append(sectionHeading);
 
 	let rows = element[1];
 	if (rows.length !== 0) {
@@ -27,18 +39,21 @@ function convert(element, section) {
 		let bRow;	// Body
 		rows.forEach((row) => {
 			bRow = document.createElement('tr');
-			Object.values(row).forEach((col) => {
+			Object.entries(row).forEach((col) => {
+				if (col[0].toLowerCase() === 'duration') {
+					col[1] = parseDurationString(col[1]);
+				}
 				let _ = document.createElement('td');
-				_.innerHTML = col;
+				_.innerHTML = col[1];
 				bRow.append(_);
 			});
 			table.append(bRow);
 		});
 
-		sectionDiv.append(table);
+		section.append(table);
 	}
 
-	return sectionDiv;
+	return section;
 }
 
 function renderHomeTab() {
@@ -48,14 +63,14 @@ function renderHomeTab() {
 	const main = document.querySelector('main');
 	main.innerHTML = '';
 
-	const sectionMap = getSectionMap();
+	const abbreviationMap = getAbbreviationMap();
 
 	Object.entries(data)
 		.filter((el) => {
-			return el[0] !== 'abb';
+			return el[0] !== 'abb';	// Remove abbreviations table
 		})
 		.map((el) => {
-			return convert(el, sectionMap.get(el[0]));
+			return constructSection(el, abbreviationMap.get(el[0]));
 		})
 		.forEach((el) => {
 			main.append(el);
