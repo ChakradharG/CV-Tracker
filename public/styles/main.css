@@ -1,18 +1,3 @@
-:root {
-  font-size: 16px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  --bg: #130227;
-  --bg-s: #4a089b;
-  --fg: #f4ecfe;
-  --fg-s: #d3b1fb;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
 body {
   background-color: var(--bg);
   color: var(--fg);
@@ -93,4 +78,36 @@ main {
   overflow: auto;
 }
 
-/*# sourceMappingURL=index.css.map */
+table {
+  margin: 20px;
+  width: 90%;
+}
+table, table th, table td {
+  border: 1px solid var(--fg-s);
+  border-collapse: collapse;
+}
+table th::first-letter {
+  text-transform: uppercase;
+}
+
+a {
+  color: var(--fg-s);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  font-size: 16px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  /* Theme variables */
+  --bg: #130227;
+  --bg-s: #4a089b;
+  --fg: #f4ecfe;
+  --fg-s: #d3b1fb;
+}
+
+/*# sourceMappingURL=main.css.map */
