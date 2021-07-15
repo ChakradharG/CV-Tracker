@@ -13,18 +13,19 @@ module.exports = async function () {
 
 	DB.getAll = async function() {
 		return {
-			abb: await this.db.all('SELECT * FROM abbreviations'),
-			ach: await this.db.all('SELECT * FROM achievements'),
-			coc: await this.db.all('SELECT * FROM cocurricular'),
-			edu: await this.db.all('SELECT * FROM education'),
-			exp: await this.db.all('SELECT * FROM experience'),
-			ext: await this.db.all('SELECT * FROM extracurricular'),
-			int: await this.db.all('SELECT * FROM internships'),
-			mis: await this.db.all('SELECT * FROM miscellaneous'),
-			per: await this.db.all('SELECT * FROM personal'),
-			pro: await this.db.all('SELECT * FROM projects'),
-			ski: await this.db.all('SELECT * FROM skills'),
-			tra: await this.db.all('SELECT * FROM training'),
+			_abb: await this.db.all('SELECT * FROM _abb'),
+			_col: await this.db.all('SELECT * FROM _col'),
+			ach: await this.db.all('SELECT * FROM ach'),
+			coc: await this.db.all('SELECT * FROM coc'),
+			edu: await this.db.all('SELECT * FROM edu'),
+			exp: await this.db.all('SELECT * FROM exp'),
+			ext: await this.db.all('SELECT * FROM ext'),
+			int: await this.db.all('SELECT * FROM int'),
+			mis: await this.db.all('SELECT * FROM mis'),
+			per: await this.db.all('SELECT * FROM per'),
+			pro: await this.db.all('SELECT * FROM pro'),
+			ski: await this.db.all('SELECT * FROM ski'),
+			tra: await this.db.all('SELECT * FROM tra'),
 		};
 	};
 
