@@ -1,6 +1,6 @@
-function getAbbreviationMap() {
-	return new Map(data.abb.map(({ sform, fform }) => {
-		return [ sform, fform ];
+function convertToMap(arr) {
+	return new Map(arr.map((el) => {
+		return Object.values(el);
 	}));
 }
 
@@ -17,7 +17,27 @@ function parseDurationString(duration) {
 	return duration;
 }
 
-function constructSection(element, heading) {
+function assignRowSpan(rows, column) {
+	rows.sort((r1, r2) => {	// Sort the rows according to their values in the provided column
+		return (r1[column] > r2[column]) - (r1[column] < r2[column]);
+	});
+
+	let count = 1;
+	for (let i = rows.length - 1; i > 0; i--) {
+		if (rows[i][column] !== rows[i-1][column]) {
+			rows[i].rowSpan = count;
+			count = 1;
+		} else {
+			rows[i].rowSpan = 0;
+			count++;
+		}
+	}
+	rows[0].rowSpan = count;
+
+	return rows;
+}
+
+function constructSection(element, heading, collapsibleColumn) {
 	let section = document.createElement('section');
 
 	let sectionHeading = document.createElement('h2');
@@ -25,33 +45,49 @@ function constructSection(element, heading) {
 	section.append(sectionHeading);
 
 	let rows = element[1];
-	if (rows.length !== 0) {
-		let table = document.createElement('table');
-
-		let hRow = document.createElement('tr');	// Head
-		Object.keys(rows[0]).forEach((col) => {
-			let _ = document.createElement('th');
-			_.innerText = col;
-			hRow.append(_);
-		});
-		table.append(hRow);
-
-		let bRow;	// Body
-		rows.forEach((row) => {
-			bRow = document.createElement('tr');
-			Object.entries(row).forEach((col) => {
-				if (col[0].toLowerCase() === 'duration') {
-					col[1] = parseDurationString(col[1]);
-				}
-				let _ = document.createElement('td');
-				_.innerHTML = col[1];
-				bRow.append(_);
-			});
-			table.append(bRow);
-		});
-
-		section.append(table);
+	if (rows.length === 0) {
+		return section;
 	}
+
+	rows = assignRowSpan(rows, collapsibleColumn);
+	let table = document.createElement('table');
+
+	let hRow = document.createElement('tr');	// Head
+	Object.keys(rows[0]).forEach((key) => {
+		if (key === 'id' || key === 'rowSpan') {
+			return;
+		}
+		let _ = document.createElement('th');
+		_.innerHTML = key;
+		hRow.append(_);
+	});
+	table.append(hRow);
+
+	let bRow;	// Body
+	rows.forEach((row) => {
+		bRow = document.createElement('tr');
+		Object.entries(row).forEach(([ key, value ]) => {
+			let _ = document.createElement('td');
+			if (key === 'id' || key === 'rowSpan') {
+				return;
+			} else if (key === collapsibleColumn) {
+				if (row.rowSpan === 0) {
+					return;
+				}
+				_.rowSpan = row.rowSpan;
+			} else if (key === 'level') {
+				value = '●'.repeat(value) + '○'.repeat((5 - value));
+
+			} else if (key === 'duration' && value) {
+				value = parseDurationString(value);
+			}
+			_.innerHTML = value;
+			bRow.append(_);
+		});
+		table.append(bRow);
+	});
+
+	section.append(table);
 
 	return section;
 }
@@ -63,14 +99,15 @@ function renderHomeTab() {
 	const main = document.querySelector('main');
 	main.innerHTML = '';
 
-	const abbreviationMap = getAbbreviationMap();
+	const abbMap = convertToMap(data._abb);
+	const colMap = convertToMap(data._col);
 
 	Object.entries(data)
 		.filter((el) => {
-			return el[0] !== 'abb';	// Remove abbreviations table
+			return (el[0] !== '_abb') && (el[0] !== '_col');	// To remove auxiliary tables
 		})
 		.map((el) => {
-			return constructSection(el, abbreviationMap.get(el[0]));
+			return constructSection(el, abbMap.get(el[0]), colMap.get(el[0]));
 		})
 		.forEach((el) => {
 			main.append(el);
