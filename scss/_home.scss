@@ -1,18 +1,47 @@
 @use './globals' as *;
 
 
+main > section {
+	margin-bottom: 3rem;
+
+	&:first-child {
+		margin-top: 1rem;
+	}
+
+	& > h2 {
+		margin-bottom: 1rem;
+	}
+}
+
 table {
-	margin: 20px;
-	width: 90%;
+	width: 98%;
+
 	&, th, td {
 		border: 1px solid $fg-s;
 		border-collapse: collapse;
 	}
-	th::first-letter {
-		text-transform: uppercase;
-	}
-}
 
-a {
-	color: $fg-s;
+	th, td {
+		padding: 0.5rem;
+	}
+
+	th {
+		color: $fg-s;
+
+		&::first-letter {
+			text-transform: uppercase;
+		}
+
+		&:first-child, &:last-child {
+			width: clamp(8rem, 20vw, 20rem);
+		}
+	}
+
+	ul {
+		list-style-position: inside;
+	}
+	
+	a {
+		color: $fg-s;
+	}
 }

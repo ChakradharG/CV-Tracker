@@ -80,19 +80,39 @@ main::-webkit-scrollbar-thumb {
   background-color: var(--bg-s);
 }
 
+main > section {
+  margin-bottom: 3rem;
+}
+main > section:first-child {
+  margin-top: 1rem;
+}
+main > section > h2 {
+  margin-bottom: 1rem;
+}
+
 table {
-  margin: 20px;
-  width: 90%;
+  width: 98%;
 }
 table, table th, table td {
   border: 1px solid var(--fg-s);
   border-collapse: collapse;
 }
+table th, table td {
+  padding: 0.5rem;
+}
+table th {
+  color: var(--fg-s);
+}
 table th::first-letter {
   text-transform: uppercase;
 }
-
-a {
+table th:first-child, table th:last-child {
+  width: clamp(8rem, 20vw, 20rem);
+}
+table ul {
+  list-style-position: inside;
+}
+table a {
   color: var(--fg-s);
 }
 
