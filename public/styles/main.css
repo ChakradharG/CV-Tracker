@@ -3,15 +3,6 @@ body {
   color: var(--fg);
   transition: background-color 0.25s ease, color 0.5s ease;
 }
-body::-webkit-scrollbar {
-  width: 0.5rem;
-}
-body::-webkit-scrollbar-track, body::-webkit-scrollbar-corner {
-  background-color: var(--bg);
-}
-body::-webkit-scrollbar-thumb {
-  background-color: var(--bg-s);
-}
 
 nav {
   width: 4rem;
@@ -74,8 +65,19 @@ nav {
   }
 }
 main {
-  margin-left: 4rem;
+  position: absolute;
+  inset: 0 0 0 4rem;
+  padding-left: 1rem;
   overflow: auto;
+}
+main::-webkit-scrollbar {
+  width: 0.5rem;
+}
+main::-webkit-scrollbar-track, main::-webkit-scrollbar-corner {
+  background-color: var(--bg);
+}
+main::-webkit-scrollbar-thumb {
+  background-color: var(--bg-s);
 }
 
 table {

@@ -5,18 +5,6 @@ body {
 	background-color: $bg;
 	color: $fg;
 	transition: background-color 0.25s ease, color 0.5s ease;
-
-	&::-webkit-scrollbar {
-		width: 0.5rem;
-
-		&-track, &-corner {
-			background-color: $bg;
-		}
-
-		&-thumb {
-			background-color: $bg-s;
-		}
-	}
 }
 
 nav {
@@ -84,6 +72,20 @@ nav {
 }
 
 main {
-	margin-left: 4rem;
+	position: absolute;
+	inset: 0 0 0 4rem;
+	padding-left: 1rem;
 	overflow: auto;
+
+	&::-webkit-scrollbar {
+		width: 0.5rem;
+
+		&-track, &-corner {
+			background-color: $bg;
+		}
+
+		&-thumb {
+			background-color: $bg-s;
+		}
+	}
 }
