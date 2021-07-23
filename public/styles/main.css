@@ -64,11 +64,17 @@ nav {
     transform: scale(100%);
   }
 }
+a {
+  color: var(--fg-s);
+}
+
 main {
   position: absolute;
   inset: 0 0 0 4rem;
   padding-left: 1rem;
   overflow: auto;
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
 }
 main::-webkit-scrollbar {
   width: 0.5rem;
@@ -86,8 +92,10 @@ main > section {
 main > section:first-child {
   margin-top: 1rem;
 }
-main > section > h2 {
+main > section h2 {
   margin-bottom: 1rem;
+  cursor: pointer;
+  display: inline-block;
 }
 
 table {
@@ -112,8 +120,27 @@ table th:first-child, table th:last-child {
 table ul {
   list-style-position: inside;
 }
-table a {
-  color: var(--fg-s);
+
+.modal-container {
+  position: fixed;
+  inset: 0 0 0 4rem;
+  backdrop-filter: blur(2px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.modal-container div {
+  background-color: var(--bg);
+  padding: 0.5rem;
+  min-width: 15rem;
+  text-align: center;
+  box-shadow: var(--fg) 0px 0px 230px -50px;
+  animation: pop 0.25s;
+}
+.modal-container div a {
+  display: block;
+  text-decoration: none;
+  margin: 1rem 0;
 }
 
 * {

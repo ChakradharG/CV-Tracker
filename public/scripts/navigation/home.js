@@ -37,11 +37,22 @@ function assignRowSpan(rows, column) {
 	return rows;
 }
 
+function addToModal(id, heading, modal) {
+	let link = document.createElement('a');
+	link.href = `#${id}`;
+	link.innerText = heading;
+	modal.append(link);
+}
+
 function constructSection(element, heading, collapsibleColumn) {
 	let section = document.createElement('section');
 
 	let sectionHeading = document.createElement('h2');
 	sectionHeading.innerText = heading;
+	sectionHeading.id = element[0];
+	sectionHeading.onclick = () => {
+		document.querySelector('.modal-container').style.display = 'flex';
+	};
 	section.append(sectionHeading);
 
 	let rows = element[1];
@@ -99,6 +110,14 @@ function renderHomeTab() {
 	const main = document.querySelector('main');
 	main.innerHTML = '';
 
+	let modalContainer = document.createElement('div');
+	modalContainer.className = 'modal-container';
+	let modal = document.createElement('div');
+	modalContainer.append(modal);
+	modalContainer.onclick = () => {
+		modalContainer.style.display = 'none';
+	};
+
 	const abbMap = convertToMap(data._abb);
 	const colMap = convertToMap(data._col);
 
@@ -107,9 +126,12 @@ function renderHomeTab() {
 			return (el[0] !== '_abb') && (el[0] !== '_col');	// To remove auxiliary tables
 		})
 		.map((el) => {
+			addToModal(el[0], abbMap.get(el[0]), modal);
 			return constructSection(el, abbMap.get(el[0]), colMap.get(el[0]));
 		})
 		.forEach((el) => {
 			main.append(el);
 		});
+
+	main.append(modalContainer);
 }

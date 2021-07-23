@@ -8,8 +8,10 @@ main > section {
 		margin-top: 1rem;
 	}
 
-	& > h2 {
+	h2 {
 		margin-bottom: 1rem;
+		cursor: pointer;
+		display: inline-block;
 	}
 }
 
@@ -40,8 +42,28 @@ table {
 	ul {
 		list-style-position: inside;
 	}
-	
-	a {
-		color: $fg-s;
+}
+
+.modal-container {
+	position: fixed;
+	inset: 0 0 0 4rem;
+	backdrop-filter: blur(2px);
+	display: none;
+	justify-content: center;
+	align-items: center;
+
+	div {
+		background-color: $bg;
+		padding: 0.5rem;
+		min-width: 15rem;
+		text-align: center;
+		box-shadow: $fg 0px 0px 230px -50px;
+		animation: pop 0.25s;
+
+		a {
+			display: block;
+			text-decoration: none;
+			margin: 1rem 0;
+		}
 	}
 }
