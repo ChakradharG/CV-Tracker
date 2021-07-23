@@ -132,7 +132,7 @@ table ul {
 .modal-container div {
   background-color: var(--bg);
   padding: 0.5rem;
-  min-width: 15rem;
+  min-width: 20rem;
   text-align: center;
   box-shadow: var(--fg) 0px 0px 230px -50px;
   animation: pop 0.25s;
