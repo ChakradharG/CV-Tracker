@@ -71,11 +71,17 @@ nav {
 	}
 }
 
+a {
+	color: $fg-s;
+}
+
 main {
 	position: absolute;
 	inset: 0 0 0 4rem;
 	padding-left: 1rem;
 	overflow: auto;
+	scroll-behavior: smooth;
+	scroll-padding-top: 1rem;
 
 	&::-webkit-scrollbar {
 		width: 0.5rem;
