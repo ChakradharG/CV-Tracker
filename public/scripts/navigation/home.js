@@ -5,7 +5,7 @@ function convertToMap(arr) {
 }
 
 function parseDurationString(duration) {
-	[ from, to ] = duration.split(':').map((str) => {
+	const [ from, to ] = duration.split(':').map((str) => {
 		return (new Date(str)).toDateString();
 	});
 
@@ -37,11 +37,26 @@ function assignRowSpan(rows, column) {
 	return rows;
 }
 
-function addToModal(id, heading, modal) {
+function addToJumpMenu(id, heading, modal) {
 	let link = document.createElement('a');
 	link.href = `#${id}`;
 	link.innerText = heading;
 	modal.append(link);
+}
+
+function createModal(temporary) {
+	let modalContainer = document.createElement('div');
+	modalContainer.className = 'modal-container';
+
+	modalContainer.innerHTML = '<div></div>';
+
+	if (!temporary) {
+		modalContainer.addEventListener('click', () => {
+			modalContainer.style.display = 'none';
+		});
+	}
+
+	return modalContainer;
 }
 
 function constructSection(element, heading, collapsibleColumn) {
@@ -50,9 +65,9 @@ function constructSection(element, heading, collapsibleColumn) {
 	let sectionHeading = document.createElement('h2');
 	sectionHeading.innerText = heading;
 	sectionHeading.id = element[0];
-	sectionHeading.onclick = () => {
+	sectionHeading.addEventListener('click', () => {
 		document.querySelector('.modal-container').style.display = 'flex';
-	};
+	});
 	section.append(sectionHeading);
 
 	let rows = element[1];
@@ -86,10 +101,10 @@ function constructSection(element, heading, collapsibleColumn) {
 					return;
 				}
 				_.rowSpan = row.rowSpan;
-			} else if (key === 'level') {
+			} else if (key === 'level') {	// Special column
 				value = '●'.repeat(value) + '○'.repeat((5 - value));
 
-			} else if (key === 'duration' && value) {
+			} else if (key === 'duration' && value) {	// Special column
 				value = parseDurationString(value);
 			}
 			_.innerHTML = value;
@@ -110,13 +125,7 @@ function renderHomeTab() {
 	const main = document.querySelector('main');
 	main.innerHTML = '';
 
-	let modalContainer = document.createElement('div');
-	modalContainer.className = 'modal-container';
-	let modal = document.createElement('div');
-	modalContainer.append(modal);
-	modalContainer.onclick = () => {
-		modalContainer.style.display = 'none';
-	};
+	let container = createModal();
 
 	const abbMap = convertToMap(data._abb);
 	const colMap = convertToMap(data._col);
@@ -126,12 +135,12 @@ function renderHomeTab() {
 			return (el[0] !== '_abb') && (el[0] !== '_col');	// To remove auxiliary tables
 		})
 		.map((el) => {
-			addToModal(el[0], abbMap.get(el[0]), modal);
+			addToJumpMenu(el[0], abbMap.get(el[0]), container.firstChild);
 			return constructSection(el, abbMap.get(el[0]), colMap.get(el[0]));
 		})
 		.forEach((el) => {
 			main.append(el);
 		});
 
-	main.append(modalContainer);
+	main.append(container);
 }

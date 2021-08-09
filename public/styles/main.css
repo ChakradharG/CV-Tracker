@@ -134,13 +134,17 @@ table ul {
   padding: 0.5rem;
   min-width: 20rem;
   text-align: center;
-  box-shadow: var(--fg) 0px 0px 230px -50px;
+  box-shadow: black 0px 0px 230px -50px;
   animation: pop 0.25s;
 }
 .modal-container div a {
   display: block;
   text-decoration: none;
   margin: 1rem 0;
+}
+.modal-container div input {
+  border: none;
+  outline: none;
 }
 
 * {
