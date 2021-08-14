@@ -76,17 +76,14 @@ function update(entity) {
 	api.invoke('getData').then((_data) => { data = _data });	// Reflect changes in the data object
 }
 
-function edit(entity) {
+function edit1(entity) {
+	// For table & column names
 	let container = createModal(true);
 	let div = container.firstChild;
 
-	let target = entity.target;
-
-	let input = (entity.type === 'row') ? document.createElement('textarea') : document.createElement('input');
+	let input = document.createElement('input');
 	input.value = entity.oldValue;
-	if (!(entity.tableID.match(/(mis)|(ski)/) && entity.column?.match(/Duration/))) {
-		input.placeholder = 'This field cannot be empty';
-	}
+	input.placeholder = 'This field cannot be empty';
 	div.append(input);
 
 	if (entity.type === 'column') {
@@ -96,7 +93,68 @@ function edit(entity) {
 		div.append(_);
 	}
 
-	if (entity.type === 'row' && (entity.column !== entity.collapsibleColumn)) {
+	div.append(createButton('modal-btn', 'Cancel', {
+		ev: 'click',
+		callback: () => {
+			container.remove();
+		}
+	}));
+
+	div.append(createButton('modal-btn', 'Save', {
+		ev: 'click',
+		callback: () => {
+			if (input.value === '') {
+				return;
+			}
+
+			entity.target.innerText = input.value;
+			entity.newValue = input.value;
+			
+			let flag;
+			if (entity.type === 'column') {
+				let _ = div.querySelector('input[type="checkbox"]');
+				if (entity.oldValue === entity.collapsibleColumn) {
+					if (!_.checked || (entity.oldValue !== entity.newValue)) {
+						entity.updateCol = true;
+						entity.collapsibleColumn = _.checked ? entity.newValue : null;
+						flag = true;
+					}
+				} else {
+					if (_.checked) {
+						entity.updateCol = true;
+						entity.collapsibleColumn = entity.newValue;
+						flag = true;
+					}
+				}
+			}
+
+			container.remove();
+
+			if ((entity.oldValue !== entity.newValue) || flag) {
+				update(entity);
+			}
+		}
+	}));
+	
+	document.querySelector('main').append(container);
+	container.style.display = 'flex';
+}
+
+function edit2(entity) {
+	// For rows
+	let container = createModal(true);
+	let div = container.firstChild;
+
+	let cannotBeEmpty = !(entity.column === 'Duration' && (entity.tableID === 'mis' || entity.tableID === 'ski'));
+
+	let input = document.createElement('textarea');
+	input.value = entity.oldValue;
+	if (cannotBeEmpty) {
+		input.placeholder = 'This field cannot be empty';
+	}
+	div.append(input);
+
+	if (entity.column !== entity.collapsibleColumn) {
 		div.append(createButton('modal-btn', 'Delete Row', {
 			ev: 'click',
 			callback: () => {
@@ -115,45 +173,30 @@ function edit(entity) {
 	div.append(createButton('modal-btn', 'Save', {
 		ev: 'click',
 		callback: () => {
-			let flag;
-			if (input.value === '' && !(entity.tableID.match(/(mis)|(ski)/) && entity.column?.match(/Duration/))) {
+			if (input.value === '' && cannotBeEmpty) {
 				return;
 			}
-			if (entity.type === 'row') {
-				let value = input.value;
-				if (entity.column === 'Level') {
-					value = (value > 5)
-						? 5
-						: (value < 0)
-							? 0
-							: value;
-					value = '●'.repeat(value) + '○'.repeat((5 - value));
-				} else if (entity.column === 'Duration') {
-					value = parseDurationString(value);
-				}
-				target.innerHTML = value;
-			} else {
-				target.innerText = input.value;
+
+			let value = input.value;
+			if (entity.column === 'Level') {
+				// Value should be between 0 and 5
+				value = (value > 5)
+					? 5
+					: (value < 0)
+						? 0
+						: value;
+				input.value = value;
+				value = '●'.repeat(value) + '○'.repeat((5 - value));
+			} else if (entity.column === 'Duration') {
+				value = parseDurationString(value);
 			}
+
+			entity.target.innerHTML = value;
 			entity.newValue = input.value;
-			if (entity.type === 'column') {
-				let _ = div.querySelector('input[type="checkbox"]');
-				if (entity.oldValue === entity.collapsibleColumn) {
-					if (!_.checked || (entity.oldValue !== entity.newValue)) {
-						entity.updateCol = true;
-						entity.collapsibleColumn = _.checked ? entity.newValue : null;
-						flag = true;
-					}
-				} else {
-					if (_.checked) {
-						entity.updateCol = true;
-						entity.collapsibleColumn = entity.newValue;
-						flag = true;
-					}
-				}
-			}
+
 			container.remove();
-			if ((entity.oldValue !== entity.newValue) || flag) {
+
+			if ((entity.oldValue !== entity.newValue)) {
 				update(entity);
 			}
 		}
@@ -174,7 +217,7 @@ function constructSection(element, heading, collapsibleColumn) {
 	});
 	sectionHeading.title = 'Right click to edit';
 	sectionHeading.addEventListener('contextmenu', () => {
-		edit({
+		edit1({
 			type: 'table',
 			target: sectionHeading,
 			tableID: element[0],
@@ -200,7 +243,7 @@ function constructSection(element, heading, collapsibleColumn) {
 		_.innerText = key;
 		_.title = 'Right click to edit';
 		_.addEventListener('contextmenu', () => {
-			edit({
+			edit1({
 				type: 'column',
 				target: _,
 				tableID: element[0],
@@ -227,7 +270,7 @@ function constructSection(element, heading, collapsibleColumn) {
 			}
 			_.title = 'Right click to edit';
 			_.addEventListener('contextmenu', () => {
-				edit({
+				edit2({
 					type: 'row',
 					target: _,
 					tableID: element[0],
