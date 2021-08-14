@@ -12,8 +12,7 @@
 	<script src="./scripts/navigation/export.js"></script>
 
 	<script>
-		let data;
-		window.api.invoke('getData').then((_data) => { data = _data }).then(renderHomeTab);
+		api.invoke('getData').then((_data) => { window.data = _data }).then(renderHomeTab);
 	</script>
 
 	<title>CV Tracker</title>
