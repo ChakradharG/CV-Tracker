@@ -20,109 +20,109 @@ INSERT INTO `_abb` VALUES('tra', 'Training/Workshops');
 
 DROP TABLE IF EXISTS `_col`;	--Collapsible Columns
 CREATE TABLE `_col` (
-	`table` TEXT NOT NULL,
+	`sform` TEXT NOT NULL,
 	`column` TEXT
 );
-INSERT INTO `_col` VALUES('ach', 'title');
-INSERT INTO `_col` VALUES('coc', 'title');
+INSERT INTO `_col` VALUES('ach', 'Title');
+INSERT INTO `_col` VALUES('coc', 'Title');
 INSERT INTO `_col` VALUES('edu', NULL);
-INSERT INTO `_col` VALUES('exp', 'organization');
-INSERT INTO `_col` VALUES('ext', 'title');
-INSERT INTO `_col` VALUES('int', 'organization');
-INSERT INTO `_col` VALUES('mis', 'title');
-INSERT INTO `_col` VALUES('per', 'title');
+INSERT INTO `_col` VALUES('exp', 'Organization');
+INSERT INTO `_col` VALUES('ext', 'Title');
+INSERT INTO `_col` VALUES('int', 'Organization');
+INSERT INTO `_col` VALUES('mis', 'Title');
+INSERT INTO `_col` VALUES('per', 'Title');
 INSERT INTO `_col` VALUES('pro', NULL);
-INSERT INTO `_col` VALUES('ski', 'domain');
+INSERT INTO `_col` VALUES('ski', 'Domain');
 INSERT INTO `_col` VALUES('tra', NULL);
 
 DROP TABLE IF EXISTS `ach`;
 CREATE TABLE `ach` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`title` TEXT NOT NULL,
-	`description` TEXT NOT NULL,
-	`duration` TEXT NOT NULL
+	`Title` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
+	`Duration` TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS `coc`;
 CREATE TABLE `coc` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`title` TEXT NOT NULL,
-	`description` TEXT NOT NULL,
-	`duration` TEXT NOT NULL
+	`Title` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
+	`Duration` TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS `edu`;
 CREATE TABLE `edu` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`title` TEXT NOT NULL,
-	`institute` TEXT NOT NULL,
-	`gpa/%` REAL NOT NULL,
-	`duration` TEXT NOT NULL
+	`Title` TEXT NOT NULL,
+	`Institute` TEXT NOT NULL,
+	`GPA/%` REAL NOT NULL,
+	`Duration` TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS `exp`;
 CREATE TABLE `exp` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`organization` TEXT NOT NULL,
-	`position` TEXT NOT NULL,
-	`description` TEXT NOT NULL,
-	`duration` TEXT NOT NULL
+	`Organization` TEXT NOT NULL,
+	`Position` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
+	`Duration` TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS `ext`;
 CREATE TABLE `ext` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`title` TEXT NOT NULL,
-	`description` TEXT NOT NULL,
-	`duration` TEXT NOT NULL
+	`Title` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
+	`Duration` TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS `int`;
 CREATE TABLE `int` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`organization` TEXT NOT NULL,
-	`description` TEXT NOT NULL,
-	`duration` TEXT NOT NULL
+	`Organization` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
+	`Duration` TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS `mis`;
 CREATE TABLE `mis` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`title` TEXT NOT NULL,
-	`description` TEXT NOT NULL,
-	`duration` TEXT
+	`Title` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
+	`Duration` TEXT
 );
 
 DROP TABLE IF EXISTS `per`;
 CREATE TABLE `per` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`title` TEXT NOT NULL,
-	`description` TEXT NOT NULL
+	`Title` TEXT NOT NULL,
+	`Description` TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS `pro`;
 CREATE TABLE `pro` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`title` TEXT NOT NULL,
-	`description` TEXT NOT NULL,
-	`duration` TEXT NOT NULL
+	`Title` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
+	`Duration` TEXT NOT NULL
 );
 
 DROP TABLE IF EXISTS `ski`;
 CREATE TABLE `ski` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`domain` TEXT NOT NULL,
-	`skill` TEXT NOT NULL,
-	`level` INTEGER NOT NULL,
-	`duration` TEXT
+	`Domain` TEXT NOT NULL,
+	`Skill` TEXT NOT NULL,
+	`Level` INTEGER NOT NULL,
+	`Duration` TEXT
 );
 
 DROP TABLE IF EXISTS `tra`;
 CREATE TABLE `tra` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`title` TEXT NOT NULL,
-	`description` TEXT NOT NULL,
-	`duration` TEXT NOT NULL
+	`Title` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
+	`Duration` TEXT NOT NULL
 );
 
 COMMIT;
