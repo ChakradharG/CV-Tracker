@@ -1,15 +1,13 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 
-let win;
-let DB;
-require('./database/helpers')().then((_DB) => { DB = _DB });
+require('./database/helpers')().then((_DB) => { global.DB = _DB });
 require('electron-reload')(__dirname, {
 	electron: require(`${__dirname}/node_modules/electron`)
 });	// Remove
 
 
 function createWindow() {
-	win = new BrowserWindow({
+	const win = new BrowserWindow({
 		width: 900,
 		height: 550,
 		// frame: false,
@@ -39,4 +37,12 @@ app.on('window-all-closed', () => {
 
 ipcMain.handle('getData', () => {
 	return DB.getAll();
+});
+
+ipcMain.on('putData', (_, payLoad) => {
+	DB.update(JSON.parse(payLoad));
+});
+
+ipcMain.on('deleteData', (_, payLoad) => {
+	DB.remove(JSON.parse(payLoad));
 });

@@ -29,5 +29,35 @@ module.exports = async function () {
 		};
 	};
 
+	DB.update = async function(entity) {
+		try {
+			if (entity.type === 'table') {
+				await this.db.run('UPDATE _abb SET fform = ? WHERE sform = ?', entity.newValue, entity.tableID);
+			} else if (entity.type === 'column') {
+				await this.db.run(`ALTER TABLE ${entity.tableID} RENAME COLUMN ${entity.oldValue} TO ${entity.newValue}`);	// No placeholder for table/column names
+
+				if (entity.updateCol) {
+					await this.db.run('UPDATE _col SET column = ? WHERE sform = ?', entity.collapsibleColumn, entity.tableID);
+				}
+			} else if (entity.type === 'row') {
+				if (entity.column === entity.collapsibleColumn) {
+					await this.db.run(`UPDATE ${entity.tableID} SET ${entity.column} = ? WHERE ${entity.column} = ?`, entity.newValue, entity.oldValue);
+				} else {
+					await this.db.run(`UPDATE ${entity.tableID} SET ${entity.column} = ? WHERE id = ?`, entity.newValue, entity.id);
+				}
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	DB.remove = async function(entity) {
+		try {
+			await this.db.run(`DELETE FROM ${entity.tableID} WHERE id = ?`, entity.id);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return DB;
 };
