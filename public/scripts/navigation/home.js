@@ -82,25 +82,40 @@ function edit1(entity) {
 	let div = container.firstChild;
 
 	let input = document.createElement('input');
+	input.type = 'text';
 	input.value = entity.oldValue;
 	input.placeholder = 'This field cannot be empty';
 	div.append(input);
 
 	if (entity.type === 'column') {
-		let _ = document.createElement('input');
-		_.type = 'checkbox';
-		_.checked = (entity.collapsibleColumn === entity.oldValue);
+		let _ = document.createElement('div');
+		_.className = 'check-container';
+
+		let checkbox = document.createElement('input');
+		checkbox.id = 'collapsibleColumn';
+		checkbox.type = 'checkbox';
+		checkbox.checked = (entity.collapsibleColumn === entity.oldValue);
+
+		let label = document.createElement('label');
+		label.htmlFor = 'collapsibleColumn';
+		label.innerText = 'Collapse';
+
+		_.append(label);
+		_.append(checkbox);
 		div.append(_);
 	}
 
-	div.append(createButton('modal-btn', 'Cancel', {
+	let btnContainer = document.createElement('div');
+	btnContainer.className = 'btn-container';
+
+	btnContainer.append(createButton('btn1', 'Cancel', {
 		ev: 'click',
 		callback: () => {
 			container.remove();
 		}
 	}));
 
-	div.append(createButton('modal-btn', 'Save', {
+	btnContainer.append(createButton('btn2', 'Save', {
 		ev: 'click',
 		callback: () => {
 			if (input.value === '') {
@@ -135,7 +150,9 @@ function edit1(entity) {
 			}
 		}
 	}));
-	
+
+	div.append(btnContainer);
+
 	document.querySelector('main').append(container);
 	container.style.display = 'flex';
 }
@@ -155,7 +172,7 @@ function edit2(entity) {
 	div.append(input);
 
 	if (entity.column !== entity.collapsibleColumn) {
-		div.append(createButton('modal-btn', 'Delete Row', {
+		div.append(createButton('btn3', 'Delete Row', {
 			ev: 'click',
 			callback: () => {
 				api.send('deleteData', JSON.stringify(entity));
@@ -163,14 +180,17 @@ function edit2(entity) {
 		}));
 	}
 
-	div.append(createButton('modal-btn', 'Cancel', {
+	let btnContainer = document.createElement('div');
+	btnContainer.className = 'btn-container';
+
+	btnContainer.append(createButton('btn1', 'Cancel', {
 		ev: 'click',
 		callback: () => {
 			container.remove();
 		}
 	}));
 
-	div.append(createButton('modal-btn', 'Save', {
+	btnContainer.append(createButton('btn2', 'Save', {
 		ev: 'click',
 		callback: () => {
 			if (input.value === '' && cannotBeEmpty) {
@@ -201,7 +221,9 @@ function edit2(entity) {
 			}
 		}
 	}));
-	
+
+	div.append(btnContainer);
+
 	document.querySelector('main').append(container);
 	container.style.display = 'flex';
 }
