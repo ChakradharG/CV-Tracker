@@ -1,10 +1,12 @@
-const assert = require('assert');
+const expect = require('chai').expect;
 
 
-describe('Array', () => {
-	describe('#indexOf()', () => {
-		it('should return -1 when the value is not present', () => {
-			assert.strictEqual([1, 2, 3].indexOf(4), -1);
+describe('DB', () => {
+	describe('#getAll()', () => {
+		it('should return object with arrays of rows from all tables in database', async () => {
+			const DB = await require('../database/helpers')();
+			const res = await DB.getAll();
+			expect(res).to.be.a('object');
 		});
 	});
 });
