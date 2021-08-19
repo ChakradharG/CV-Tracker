@@ -64,9 +64,7 @@ function createButton(className, innerText, listener){
 	let btn = document.createElement('button');
 	btn.className = className;
 	btn.innerText = innerText;
-	if (listener) {
-		btn.addEventListener(listener.ev, listener.callback);
-	}
+	btn.addEventListener(listener.ev, listener.callback);
 
 	return btn;
 }
