@@ -39,6 +39,10 @@ ipcMain.handle('getData', () => {
 	return DB.getAll();
 });
 
+ipcMain.handle('getColumns', (_, payLoad) => {
+	return DB.getCol(payLoad);
+});
+
 ipcMain.on('putData', (_, payLoad) => {
 	DB.update(JSON.parse(payLoad));
 });

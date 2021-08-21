@@ -29,6 +29,10 @@ module.exports = async function () {
 		};
 	};
 
+	DB.getCol = async function(table) {
+		return await this.db.all(`PRAGMA table_info(${table})`);
+	}
+
 	DB.update = async function(entity) {
 		try {
 			if (entity.type === 'table') {
