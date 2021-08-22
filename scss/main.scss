@@ -18,3 +18,8 @@
 	--fg: #f4ecfe;
 	--fg-s: #d3b1fb;
 }
+
+input, textarea, button, select, label {
+	font-size: 1rem;
+	font-family: inherit;
+}
