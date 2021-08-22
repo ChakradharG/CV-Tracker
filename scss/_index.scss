@@ -4,7 +4,7 @@
 body {
 	background-color: $bg;
 	color: $fg;
-	transition: background-color 0.25s ease, color 0.5s ease;
+	transition: background-color 0.5s ease, color 0.25s ease;
 }
 
 nav {
@@ -96,7 +96,7 @@ main {
 	}
 
 	button {
-		background-color: $bg;
+		background-color: transparent;
 		color: $fg;
 		border: 1px solid $fg;
 		padding: 0.5rem;

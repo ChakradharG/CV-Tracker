@@ -55,6 +55,7 @@ table {
 		min-height: 10rem;
 		box-shadow: $fg 0px 0px 230px -50px;
 		animation: pop 0.25s;
+		transition: background-color 0.5s ease;
 
 		a {
 			display: block;
@@ -68,7 +69,7 @@ table {
 			padding: 0.5rem;
 			outline: none;
 			width: 100%;
-			background-color: $bg;
+			background-color: transparent;
 			margin: 1rem 0 3rem 0;
 			resize: vertical;
 		}
