@@ -1,0 +1,10 @@
+@use './globals' as *;
+
+
+select {
+	background-color: $bg;
+	color: $fg;
+	outline: none;
+	padding: 0.5rem;
+	border: 1px solid $fg;
+}
