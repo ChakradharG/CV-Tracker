@@ -86,6 +86,11 @@ main::-webkit-scrollbar-thumb {
   background-color: var(--bg-s);
 }
 
+input, textarea, button, select, label {
+  font-size: 1rem;
+  font-family: inherit;
+}
+
 main > section {
   margin-bottom: 3rem;
 }
@@ -131,7 +136,6 @@ table ul {
   padding: 0.5rem;
   min-width: 25rem;
   min-height: 10rem;
-  text-align: center;
   box-shadow: var(--fg) 0px 0px 230px -50px;
   animation: pop 0.25s;
 }
@@ -141,14 +145,12 @@ table ul {
   margin: 1rem 0;
 }
 .modal-container > div textarea, .modal-container > div input[type=text] {
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   color: var(--fg);
   border: 1px solid var(--fg);
   padding: 0.5rem;
   outline: none;
   width: 100%;
   background-color: var(--bg);
-  font-size: 1rem;
   margin: 1rem 0 3rem 0;
   resize: vertical;
 }
@@ -157,7 +159,6 @@ table ul {
   color: var(--fg);
   border: 1px solid var(--fg);
   padding: 0.5rem;
-  font-size: 0.85rem;
   cursor: pointer;
   transition: 0.25s ease;
 }
@@ -175,6 +176,7 @@ table ul {
 }
 .modal-container > div .check-container {
   padding: 0.5rem;
+  bottom: calc(1rem + 1px);
 }
 .modal-container > div .btn-container {
   position: absolute;
@@ -213,6 +215,14 @@ table ul {
   height: 0.6rem;
   top: 0.13rem;
   left: 0.4rem;
+}
+
+select {
+  background-color: var(--bg);
+  color: var(--fg);
+  outline: none;
+  padding: 0.5rem;
+  border: 1px solid var(--fg);
 }
 
 * {
