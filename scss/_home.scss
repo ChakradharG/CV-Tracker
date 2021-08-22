@@ -73,20 +73,6 @@ table {
 			resize: vertical;
 		}
 
-		button {
-			background-color: $bg;
-			color: $fg;
-			border: 1px solid $fg;
-			padding: 0.5rem;
-			cursor: pointer;
-			transition: 0.25s ease;
-
-			&:hover {
-				color: $bg-s;
-				border-color: $bg-s;
-			}
-		}
-
 		label {
 			cursor: pointer;
 		}

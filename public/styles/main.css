@@ -85,10 +85,17 @@ main::-webkit-scrollbar-track, main::-webkit-scrollbar-corner {
 main::-webkit-scrollbar-thumb {
   background-color: var(--bg-s);
 }
-
-input, textarea, button, select, label {
-  font-size: 1rem;
-  font-family: inherit;
+main button {
+  background-color: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--fg);
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+main button:hover {
+  color: var(--bg-s);
+  border-color: var(--bg-s);
 }
 
 main > section {
@@ -146,25 +153,13 @@ table ul {
 }
 .modal-container > div textarea, .modal-container > div input[type=text] {
   color: var(--fg);
-  border: 1px solid var(--fg);
+  border: 1px solid var(--fg-s);
   padding: 0.5rem;
   outline: none;
   width: 100%;
   background-color: var(--bg);
   margin: 1rem 0 3rem 0;
   resize: vertical;
-}
-.modal-container > div button {
-  background-color: var(--bg);
-  color: var(--fg);
-  border: 1px solid var(--fg);
-  padding: 0.5rem;
-  cursor: pointer;
-  transition: 0.25s ease;
-}
-.modal-container > div button:hover {
-  color: var(--bg-s);
-  border-color: var(--bg-s);
 }
 .modal-container > div label {
   cursor: pointer;
@@ -222,7 +217,16 @@ select {
   color: var(--fg);
   outline: none;
   padding: 0.5rem;
-  border: 1px solid var(--fg);
+  border: 1px solid var(--fg-s);
+}
+
+main > section > textarea {
+  color: var(--fg);
+  border: 1px solid var(--fg-s);
+  padding: 0.5rem;
+  outline: none;
+  background-color: var(--bg);
+  resize: vertical;
 }
 
 * {
@@ -239,6 +243,11 @@ select {
   --bg-s: #4a089b;
   --fg: #f4ecfe;
   --fg-s: #d3b1fb;
+}
+
+input, textarea, button, select, label {
+  font-size: 1rem;
+  font-family: inherit;
 }
 
 /*# sourceMappingURL=main.css.map */
