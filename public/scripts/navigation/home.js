@@ -38,24 +38,21 @@ function assignRowSpan(rows, column) {
 	return rows;
 }
 
-function addToJumpMenu(id, heading, modal) {
+function addToJumpMenu(id, heading) {
 	let link = document.createElement('a');
 	link.href = `#${id}`;
 	link.innerText = heading;
-	modal.append(link);
+	link.addEventListener('click', () => {
+		document.querySelector('.modal-container').style.display = 'none';
+	})
+
+	return link;
 }
 
-function createModal(temporary) {
+function createModal() {
 	let modalContainer = document.createElement('div');
 	modalContainer.className = 'modal-container';
-
 	modalContainer.innerHTML = '<div></div>';
-
-	if (!temporary) {
-		modalContainer.addEventListener('click', () => {
-			modalContainer.style.display = 'none';
-		});
-	}
 
 	return modalContainer;
 }
@@ -76,7 +73,7 @@ function update(entity) {
 
 function edit1(entity) {
 	// For table & column names
-	let container = createModal(true);
+	let container = createModal();
 	let div = container.firstChild;
 
 	let input = document.createElement('input');
@@ -157,7 +154,7 @@ function edit1(entity) {
 
 function edit2(entity) {
 	// For rows
-	let container = createModal(true);
+	let container = createModal();
 	let div = container.firstChild;
 
 	let cannotBeEmpty = !(entity.column === 'Duration' && (entity.tableID === 'mis' || entity.tableID === 'ski'));
@@ -334,7 +331,7 @@ function renderHomeTab() {
 			return (el[0] !== '_abb') && (el[0] !== '_col');	// To remove auxiliary tables
 		})
 		.map((el) => {
-			addToJumpMenu(el[0], abbMap.get(el[0]), container.firstChild);
+			container.firstChild.append(addToJumpMenu(el[0], abbMap.get(el[0])));
 			return constructSection(el, abbMap.get(el[0]), colMap.get(el[0]));
 		})
 		.forEach((el) => {
