@@ -31,7 +31,15 @@ module.exports = async function () {
 
 	DB.getCol = async function(table) {
 		return await this.db.all(`PRAGMA table_info(${table})`);
-	}
+	};
+
+	DB.add = async function(entity) {
+		try {
+			await this.db.run(`INSERT INTO ${entity.tableID}(${entity.columnNames}) VALUES(${entity.values})`);
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	DB.update = async function(entity) {
 		try {
