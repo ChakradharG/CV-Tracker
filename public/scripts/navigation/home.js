@@ -277,6 +277,7 @@ function constructSection(element, heading, collapsibleColumn) {
 	let bRow;	// Body
 	rows.forEach((row) => {
 		bRow = document.createElement('tr');
+		bRow.id = element[0] + row['id'];
 		Object.entries(row).forEach(([ key, value ]) => {
 			let _ = document.createElement('td');
 			if (key === 'id' || key === 'rowSpan') {
