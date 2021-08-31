@@ -18,6 +18,14 @@ function parseDurationString(duration) {
 	return duration;
 }
 
+function parseLevel(level) {
+	if (level >= 0 && level <= 5) {
+		return '●'.repeat(level) + '○'.repeat((5 - level));
+	} else {
+		return 'Invalid value. Please input a value between 0 and 5';
+	}
+}
+
 function assignRowSpan(rows, column) {
 	rows.sort((r1, r2) => {
 		// Sort the rows according to their values in the provided column
@@ -195,14 +203,7 @@ function edit2(entity) {
 
 			let value = input.value;
 			if (entity.column === 'Level') {
-				// Value should be between 0 and 5
-				value = (value > 5)
-					? 5
-					: (value < 0)
-						? 0
-						: value;
-				input.value = value;
-				value = '●'.repeat(value) + '○'.repeat((5 - value));
+				value = parseLevel(value);
 			} else if (entity.column === 'Duration') {
 				value = parseDurationString(value);
 			}
@@ -299,7 +300,7 @@ function constructSection(element, heading, collapsibleColumn) {
 				});
 			});
 			if (key === 'Level') {	// Special column
-				value = '●'.repeat(value) + '○'.repeat((5 - value));
+				value = parseLevel(value);
 
 			} else if (key === 'Duration' && value) {	// Special column
 				value = parseDurationString(value);
