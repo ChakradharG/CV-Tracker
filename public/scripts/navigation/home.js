@@ -19,7 +19,8 @@ function parseDurationString(duration) {
 }
 
 function assignRowSpan(rows, column) {
-	rows.sort((r1, r2) => {	// Sort the rows according to their values in the provided column
+	rows.sort((r1, r2) => {
+		// Sort the rows according to their values in the provided column
 		return (r1[column] > r2[column]) - (r1[column] < r2[column]);
 	});
 
@@ -44,7 +45,7 @@ function addToJumpMenu(id, heading) {
 	link.innerText = heading;
 	link.addEventListener('click', () => {
 		document.querySelector('.modal-container').style.display = 'none';
-	})
+	});
 
 	return link;
 }
@@ -66,8 +67,8 @@ function createButton(className, innerText, listener){
 	return btn;
 }
 
-function update(entity) {
-	api.send('putData', JSON.stringify(entity));	// Reflect changes in the backend
+function update(method, entity) {
+	api.send(method, JSON.stringify(entity));	// Reflect changes in the backend
 	api.invoke('getData').then((_data) => { data = _data });	// Reflect changes in the data object
 }
 
@@ -141,7 +142,7 @@ function edit1(entity) {
 			container.remove();
 
 			if ((entity.oldValue !== entity.newValue) || flag) {
-				update(entity);
+				update('putData', entity);
 			}
 		}
 	}));
@@ -212,7 +213,7 @@ function edit2(entity) {
 			container.remove();
 
 			if ((entity.oldValue !== entity.newValue)) {
-				update(entity);
+				update('putData', entity);
 			}
 		}
 	}));
