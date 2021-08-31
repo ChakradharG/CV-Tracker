@@ -20,12 +20,12 @@ async function constructTable(sform, div) {
 
 		let label = document.createElement('label');
 		label.innerText = columnName;
-		label.htmlFor = `inp-${index}`;
+		label.htmlFor = 'inp' + index;
 		label.dataset.index = index;
 		div.append(label);
 
 		let textArea = document.createElement('textarea');
-		textArea.id = `inp-${index}`;
+		textArea.id = 'inp' + index;
 		textArea.dataset.index = index;
 		if (!(columnName === 'Duration' && (sform === 'mis' || sform === 'ski'))) {
 			textArea.placeholder = 'This field cannot be empty';
