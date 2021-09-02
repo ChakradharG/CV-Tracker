@@ -83,18 +83,6 @@ main {
 	scroll-behavior: smooth;
 	scroll-padding-top: 1rem;
 
-	&::-webkit-scrollbar {
-		width: 0.5rem;
-
-		&-track, &-corner {
-			background-color: $bg;
-		}
-
-		&-thumb {
-			background-color: $bg-s;
-		}
-	}
-
 	button {
 		background-color: transparent;
 		color: $fg;
@@ -107,5 +95,17 @@ main {
 			color: $bg-s;
 			border-color: $bg-s;
 		}
+	}
+}
+
+::-webkit-scrollbar {
+	width: 0.5rem;
+
+	&-track, &-corner {
+		background-color: $bg;
+	}
+
+	&-thumb {
+		background-color: $bg-s;
 	}
 }
