@@ -75,9 +75,20 @@ function createButton(className, innerText, listener){
 	return btn;
 }
 
-function update(method, entity) {
+function update(method, entity, otherTab) {
 	api.send(method, JSON.stringify(entity));	// Reflect changes in the backend
-	api.invoke('getData').then((_data) => { data = _data });	// Reflect changes in the data object
+	api.invoke('getData')
+		.then((_data) => { data = _data })	// Reflect changes in the data object
+		.then(() => {	// Reflect changes on screen
+			if (otherTab) {
+				return;
+			}
+
+			let id = entity.tableID;
+			let section = document.querySelector(`#${id}`).parentElement;
+			section.after(constructSection([ id, data[id] ], convertToMap(data._abb).get(id), convertToMap(data._col).get(id)));
+			section.remove();
+		});
 }
 
 function edit1(entity) {
@@ -126,7 +137,6 @@ function edit1(entity) {
 				return;
 			}
 
-			entity.target.innerText = input.value;
 			entity.newValue = input.value;
 			
 			let flag;
@@ -179,7 +189,8 @@ function edit2(entity) {
 		div.append(createButton('btn3', 'Delete Row', {
 			ev: 'click',
 			callback: () => {
-				api.send('deleteData', JSON.stringify(entity));
+				container.remove();
+				update('deleteData', entity);
 			}
 		}));
 	}
@@ -201,16 +212,7 @@ function edit2(entity) {
 				return;
 			}
 
-			let value = input.value;
-			if (entity.column === 'Level') {
-				value = parseLevel(value);
-			} else if (entity.column === 'Duration') {
-				value = parseDurationString(value);
-			}
-
-			entity.target.innerHTML = value;
 			entity.newValue = input.value;
-
 			container.remove();
 
 			if ((entity.oldValue !== entity.newValue)) {
@@ -238,7 +240,6 @@ function constructSection(element, heading, collapsibleColumn) {
 	sectionHeading.addEventListener('contextmenu', () => {
 		edit1({
 			type: 'table',
-			target: sectionHeading,
 			tableID: element[0],
 			oldValue: heading
 		});
@@ -264,7 +265,6 @@ function constructSection(element, heading, collapsibleColumn) {
 		_.addEventListener('contextmenu', () => {
 			edit1({
 				type: 'column',
-				target: _,
 				tableID: element[0],
 				oldValue: key,
 				collapsibleColumn: collapsibleColumn
@@ -292,7 +292,6 @@ function constructSection(element, heading, collapsibleColumn) {
 			_.addEventListener('contextmenu', () => {
 				edit2({
 					type: 'row',
-					target: _,
 					tableID: element[0],
 					oldValue: row[key],
 					column: key,
