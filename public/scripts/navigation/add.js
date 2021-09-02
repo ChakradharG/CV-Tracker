@@ -86,7 +86,7 @@ function renderAddTab() {
 				}
 			}
 
-			update('postData', entity);
+			update('postData', entity, true);
 			constructTable(select.dataset.id, div);
 		}
 	}));
