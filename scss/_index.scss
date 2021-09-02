@@ -89,6 +89,7 @@ main {
 		border: 1px solid $fg;
 		padding: 0.5rem;
 		cursor: pointer;
+		user-select: none;	// To prevent selection of text
 		transition: 0.25s ease;
 
 		&:hover {
@@ -108,4 +109,9 @@ main {
 	&-thumb {
 		background-color: $bg-s;
 	}
+}
+
+::selection {
+	color: #130227;
+	background: #d3b1fb;
 }
