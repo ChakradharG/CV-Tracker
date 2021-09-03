@@ -52,7 +52,7 @@ table {
 		position: relative;
 		padding: 0.5rem;
 		min-width: 25rem;
-		min-height: 10rem;
+		min-height: 8rem;
 		box-shadow: $fg 0px 0px 230px -50px;
 		animation: pop 0.25s;
 		text-align: center;
@@ -71,8 +71,12 @@ table {
 			outline: none;
 			width: 100%;
 			background-color: transparent;
-			margin: 1rem 0 3rem 0;
+			margin: 0.5rem 0 4rem 0;
+		}
+
+		textarea {
 			resize: vertical;
+			height: 8rem;
 		}
 
 		label {
