@@ -61,10 +61,6 @@ function renderAddTab() {
 	main.append(createButton('btn', 'Save', {
 		ev: 'click',
 		callback: () => {
-			if (!select.dataset.id) {
-				return;
-			}
-
 			let entity = {};
 			entity.tableID = select.dataset.id;
 
@@ -90,6 +86,7 @@ function renderAddTab() {
 			constructTable(select.dataset.id, div);
 		}
 	}));
+	document.querySelector('.btn').style.display = 'none';
 
 	Object.entries(data._abb)
 		.map((el) => {
@@ -99,6 +96,7 @@ function renderAddTab() {
 				select.innerHTML = `${el[1].fform} &nbsp;⯆`;
 				select.dataset.id = el[1].sform;
 				constructTable(el[1].sform, div);
+				document.querySelector('.btn').style.display = 'initial';
 			});
 
 			container.firstChild.append(link);
