@@ -79,7 +79,7 @@ main {
 	position: absolute;
 	inset: 0 0 0 4rem;
 	padding-left: 1rem;
-	overflow: auto;
+	overflow: auto scroll;
 	scroll-behavior: smooth;
 	scroll-padding-top: 1rem;
 
@@ -114,4 +114,9 @@ main {
 ::selection {
 	color: #130227;
 	background: #d3b1fb;
+}
+
+::placeholder {
+	color: $fg-s;
+	opacity: 0.7;
 }
