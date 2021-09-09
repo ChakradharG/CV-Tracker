@@ -27,9 +27,30 @@ function parseLevel(level) {
 }
 
 function assignRowSpan(rows, column) {
+	let firstColumn = Object.keys(rows[0])[1];
 	rows.sort((r1, r2) => {
-		// Sort the rows according to their values in the provided column
-		return (r1[column] > r2[column]) - (r1[column] < r2[column]);
+		if (column) {
+			// Sort by collapsible column if it exists
+			if (r1[column] > r2[column]) {
+				return 1;
+			} else if (r1[column] < r2[column]) {
+				return -1;
+			}
+		}
+
+		if ('Duration' in r1) {
+			// If collapsible column doesn't exist or if 2 rows have the same value, sort by 'Duration' column
+			if (((r1['Duration']?.split(':')[1] ?? r1['Duration']?.split(':')[0])?.replace(/-/g, '') ?? null) > ((r2['Duration']?.split(':')[1] ?? r2['Duration']?.split(':')[0])?.replace(/-/g, '') ?? null)) {
+				return -1;
+			} else if (((r1['Duration']?.split(':')[1] ?? r1['Duration']?.split(':')[0])?.replace(/-/g, '') ?? null) < ((r2['Duration']?.split(':')[1] ?? r2['Duration']?.split(':')[0])?.replace(/-/g, '') ?? null)) {
+				return 1;
+			} else {
+				return 0;
+			}
+		} else {
+			// If neither exist then sort by the first column
+			return (r1[firstColumn] > r2[firstColumn]) - (r1[firstColumn] < r2[firstColumn]);
+		}
 	});
 
 	let count = 1;
@@ -212,7 +233,7 @@ function edit2(entity) {
 				return;
 			}
 
-			entity.newValue = input.value;
+			entity.newValue = input.value || null;
 			container.remove();
 
 			if ((entity.oldValue !== entity.newValue)) {
