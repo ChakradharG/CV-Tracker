@@ -46,7 +46,7 @@ function renderAddTab() {
 
 	let container = createModal();
 
-	let select = document.createElement('span');
+	let select = document.createElement('div');
 	select.className = 'select';
 	select.innerHTML = 'Select a Table &nbsp;⯆';
 	select.addEventListener('click', () => {
@@ -96,7 +96,7 @@ function renderAddTab() {
 				select.innerHTML = `${el[1].fform} &nbsp;⯆`;
 				select.dataset.id = el[1].sform;
 				constructTable(el[1].sform, div);
-				document.querySelector('.btn').style.display = 'initial';
+				document.querySelector('.btn').style.display = 'block';
 			});
 
 			container.firstChild.append(link);
