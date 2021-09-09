@@ -1,10 +1,32 @@
 @use './globals' as *;
 
 
-select {
-	background-color: $bg;
-	color: $fg;
-	outline: none;
+.select {
+	cursor: pointer;
 	padding: 0.5rem;
-	border: 1px solid $fg;
+	margin: 1.2rem auto 3rem auto;
+	width: fit-content;
+	border: 1px solid $fg-s;
+}
+
+.input-fields {
+	textarea {
+		color: $fg;
+		border: 1px solid $fg-s;
+		padding: 0.5rem;
+		outline: none;
+		background-color: transparent;
+		resize: vertical;
+		display: block;
+		width: calc(98% - 1px);	// Hack for weird difference ( < 1) between table width and textarea width
+		margin-bottom: 1rem;
+	}
+
+	label {
+		cursor: pointer;
+	}
+}
+
+.select ~ .btn {
+	margin: 3rem calc(2% + 1px) 3rem auto;
 }

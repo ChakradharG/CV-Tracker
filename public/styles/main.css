@@ -72,18 +72,9 @@ main {
   position: absolute;
   inset: 0 0 0 4rem;
   padding-left: 1rem;
-  overflow: auto;
+  overflow: auto scroll;
   scroll-behavior: smooth;
   scroll-padding-top: 1rem;
-}
-main::-webkit-scrollbar {
-  width: 0.5rem;
-}
-main::-webkit-scrollbar-track, main::-webkit-scrollbar-corner {
-  background-color: var(--bg);
-}
-main::-webkit-scrollbar-thumb {
-  background-color: var(--bg-s);
 }
 main button {
   background-color: transparent;
@@ -91,11 +82,32 @@ main button {
   border: 1px solid var(--fg);
   padding: 0.5rem;
   cursor: pointer;
+  user-select: none;
   transition: 0.25s ease;
 }
 main button:hover {
   color: var(--bg-s);
   border-color: var(--bg-s);
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner {
+  background-color: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-s);
+}
+
+::selection {
+  color: #130227;
+  background: #d3b1fb;
+}
+
+::placeholder {
+  color: var(--fg-s);
+  opacity: 0.7;
 }
 
 main > section {
@@ -112,6 +124,7 @@ main > section h2 {
 
 table {
   width: 98%;
+  max-width: 98%;
 }
 table, table th, table td {
   border: 1px solid var(--fg-s);
@@ -119,6 +132,7 @@ table, table th, table td {
 }
 table th, table td {
   padding: 0.5rem;
+  word-break: break-word;
 }
 table th {
   color: var(--fg-s);
@@ -142,9 +156,10 @@ table ul {
   position: relative;
   padding: 0.5rem;
   min-width: 25rem;
-  min-height: 10rem;
+  min-height: 8rem;
   box-shadow: var(--fg) 0px 0px 230px -50px;
   animation: pop 0.25s;
+  text-align: center;
   transition: background-color 0.5s ease;
 }
 .modal-container > div a {
@@ -159,8 +174,11 @@ table ul {
   outline: none;
   width: 100%;
   background-color: transparent;
-  margin: 1rem 0 3rem 0;
+  margin: 0.5rem 0 4rem 0;
+}
+.modal-container > div textarea {
   resize: vertical;
+  height: 8rem;
 }
 .modal-container > div label {
   cursor: pointer;
@@ -213,31 +231,42 @@ table ul {
   left: 0.4rem;
 }
 
-select {
-  color: var(--fg);
-  outline: none;
+.select {
+  cursor: pointer;
   padding: 0.5rem;
+  margin: 1.2rem auto 3rem auto;
+  width: fit-content;
   border: 1px solid var(--fg-s);
 }
 
-main > section > textarea {
+.input-fields textarea {
   color: var(--fg);
   border: 1px solid var(--fg-s);
   padding: 0.5rem;
   outline: none;
   background-color: transparent;
   resize: vertical;
+  display: block;
+  width: calc(98% - 1px);
+  margin-bottom: 1rem;
+}
+.input-fields label {
+  cursor: pointer;
+}
+
+.select ~ .btn {
+  margin: 3rem calc(2% + 1px) 3rem auto;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 :root {
   font-size: 18px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   /* Theme variables */
   --bg: #130227;
   --bg-s: #4a089b;
