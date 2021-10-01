@@ -12,14 +12,14 @@ function createWindow() {
 		height: 550,
 		minWidth: 700,
 		minHeight: 550,
-		// frame: false,
+		frame: false,
 		webPreferences: {
 			preload: `${__dirname}/preload.js`
 		}
 	});
 
 	win.loadFile(`${__dirname}/public/index.html`);
-	win.removeMenu();	// Remove
+	// win.removeMenu();	// Remove
 	win.webContents.openDevTools();	// Remove
 }
 
