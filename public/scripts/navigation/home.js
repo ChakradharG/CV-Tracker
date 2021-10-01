@@ -5,14 +5,14 @@ function convertToMap(arr) {
 }
 
 function parseDurationString(duration) {
-	const [ from, to ] = duration.split(':').map((str) => {
+	const [ start, end ] = duration.split(':').map((str) => {
 		return (new Date(str)).toDateString();
 	});
 
-	duration = (from === 'Invalid Date') ? from : `${from.slice(8, 10)} ${from.slice(4, 7)} ${from.slice(11, 15)}`;
-	if (to) {
+	duration = (start === 'Invalid Date') ? start : `${start.slice(8, 10)} ${start.slice(4, 7)} ${start.slice(11, 15)}`;
+	if (end) {
 		duration += ' - ';
-		duration += (to === 'Invalid Date') ? to : `${to.slice(8, 10)} ${to.slice(4, 7)} ${to.slice(11, 15)}`;
+		duration += (end === 'Invalid Date') ? end : `${end.slice(8, 10)} ${end.slice(4, 7)} ${end.slice(11, 15)}`;
 	}
 
 	return duration;
