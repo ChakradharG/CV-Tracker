@@ -1,13 +1,14 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 
 require('./database/helpers')().then((_DB) => { global.DB = _DB });
-require('electron-reload')(__dirname, {
-	electron: require(`${__dirname}/node_modules/electron`)
-});	// Remove
+require('electron-reload')(__dirname);//, {
+// 	electron: require(`${__dirname}/node_modules/electron`)
+// });	// Remove
 
 
+let win;
 function createWindow() {
-	const win = new BrowserWindow({
+	win = new BrowserWindow({
 		width: 900,
 		height: 550,
 		minWidth: 700,
@@ -34,6 +35,16 @@ app.on('activate', () => {
 app.on('window-all-closed', () => {
 	if (process.platform !== 'darwin') {
 		app.quit();
+	}
+});
+
+ipcMain.on('winManip', (_, action) => {
+	if (action === 'close') {
+		app.quit();
+	} else if (action === 'maximize') {
+		win.isMaximized() ? win.unmaximize() : win.maximize();
+	} else if (action === 'minimize') {
+		win.isMinimized() ? win.restore() : win.minimize();
 	}
 });
 

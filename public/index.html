@@ -40,7 +40,9 @@
 	<div id="titlebar">
 		Icon
 		<div class="ctrl-btns">
-			- # X
+			<button onclick="api.send('winManip', 'minimize')">-</button>
+			<button onclick="api.send('winManip', 'maximize')">#</button>
+			<button onclick="api.send('winManip', 'close')">X</button>
 		</div>
 	</div>
 

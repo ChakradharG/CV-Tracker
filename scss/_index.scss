@@ -78,6 +78,7 @@ a {
 
 #titlebar {
 	-webkit-app-region: drag;
+	user-select: none;
 	background-color: $bg-s;
 	color: $fg;
 	height: 30px;
@@ -86,6 +87,7 @@ a {
 	align-items: center;
 
 	.ctrl-btns {
+		-webkit-app-region: no-drag;
 		width: 50px;
 	}
 }
