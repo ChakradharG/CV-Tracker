@@ -41,9 +41,7 @@ app.on('window-all-closed', () => {
 ipcMain.on('winManip', (_, action) => {
 	if (action === 'close') {
 		app.quit();
-	} else if (action === 'maximize') {
-		win.isMaximized() ? win.unmaximize() : win.maximize();
-	} else if (action === 'minimize') {
+	} else {
 		win.isMinimized() ? win.restore() : win.minimize();
 	}
 });
