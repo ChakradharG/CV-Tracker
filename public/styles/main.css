@@ -72,21 +72,50 @@ a {
 #titlebar {
   -webkit-app-region: drag;
   user-select: none;
-  background-color: var(--bg-s);
+  z-index: 1;
   color: var(--fg);
   height: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+#titlebar .blur {
+  fill: #868686;
+  color: #868686;
+}
 #titlebar .ctrl-btns {
   -webkit-app-region: no-drag;
-  width: 50px;
+  font-size: 0;
+}
+#titlebar .ctrl-btns button {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  height: 30px;
+  width: 46px;
+}
+#titlebar .ctrl-btns button svg {
+  width: 10px;
+  height: 10px;
+  fill: var(--fg);
+}
+#titlebar .ctrl-btns .minimize:hover {
+  background-color: #9e9e9e28;
+}
+#titlebar .ctrl-btns .minimize:hover .blur, #titlebar .ctrl-btns .minimize:hover svg {
+  fill: var(--fg);
+}
+#titlebar .ctrl-btns .close:hover {
+  background-color: #d42c3a;
+}
+#titlebar .ctrl-btns .close:hover .blur, #titlebar .ctrl-btns .close:hover svg {
+  fill: #f4ecfe;
 }
 
 main {
   position: fixed;
   inset: 30px 0 0 4rem;
+  z-index: -1;
   padding-left: 1rem;
   overflow: auto scroll;
   scroll-behavior: smooth;
@@ -118,7 +147,7 @@ main button:hover {
 
 ::selection {
   color: #130227;
-  background: #d3b1fb;
+  background-color: #d3b1fb;
 }
 
 ::placeholder {
@@ -162,7 +191,7 @@ table ul {
 
 .modal-container {
   position: fixed;
-  inset: 0 0 0 4rem;
+  inset: 30px 0 0 4rem;
   display: none;
   justify-content: center;
   align-items: center;

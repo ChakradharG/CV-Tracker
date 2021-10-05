@@ -9,7 +9,7 @@ body {
 
 nav {
 	width: 4rem;
-	height: calc(100vh - 30px);
+	height: calc(100vh - #{$tb-height});	// Interpolation
 	position: fixed;
 	bottom: 0;
 	display: flex;
@@ -79,22 +79,58 @@ a {
 #titlebar {
 	-webkit-app-region: drag;
 	user-select: none;
-	background-color: $bg-s;
+	z-index: 1;
 	color: $fg;
-	height: 30px;
+	height: $tb-height;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 
+	.blur {
+		fill: $ctrl-btns-blur;
+		color: $ctrl-btns-blur;
+	}
+
 	.ctrl-btns {
 		-webkit-app-region: no-drag;
-		width: 50px;
+		font-size: 0;	// Whitespace(HTML) between buttons creates space (inline-block)
+
+		button {
+			background-color: transparent;
+			outline: none;
+			border: none;
+			height: $tb-height;
+			width: 46px;
+
+			svg {
+				width: 10px;
+				height: 10px;
+				fill: $fg;
+			}
+		}
+
+		.minimize:hover {
+			background-color: $mini-btn-hover;
+		
+			.blur, svg {
+				fill: $fg;
+			}
+		}
+
+		.close:hover {
+			background-color: $close-btn-hover;
+		
+			.blur, svg {
+				fill: $light1;
+			}
+		}
 	}
 }
 
 main {
 	position: fixed;
-	inset: 30px 0 0 4rem;
+	inset: $tb-height 0 0 4rem;
+	z-index: -1;
 	padding-left: 1rem;
 	overflow: auto scroll;
 	scroll-behavior: smooth;
@@ -129,8 +165,8 @@ main {
 }
 
 ::selection {
-	color: #130227;
-	background: #d3b1fb;
+	color: $dark1;
+	background-color: $light2;
 }
 
 ::placeholder {
