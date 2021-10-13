@@ -76,6 +76,11 @@ a {
 	color: $fg-s;
 }
 
+#logo {
+	width: $logo-size;
+	margin: 5px;
+}
+
 #titlebar {
 	-webkit-app-region: drag;
 	user-select: none;
