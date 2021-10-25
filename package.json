@@ -19,10 +19,8 @@
   },
   "homepage": "https://github.com/ChakradharG/CV-Tracker#readme",
   "devDependencies": {
-    "chai": "^4.3.4",
     "electron-reload": "^1.5.0",
-    "eslint": "^7.29.0",
-    "mocha": "^9.0.0"
+    "eslint": "^7.29.0"
   },
   "dependencies": {
     "electron": "^13.1.4",
