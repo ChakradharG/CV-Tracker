@@ -229,7 +229,11 @@ function edit2(entity) {
 	btnContainer.append(createButton('btn2', 'Save', {
 		ev: 'click',
 		callback: () => {
-			if (input.value === '' && cannotBeEmpty) {
+			if (input.value === '') {
+				if (cannotBeEmpty) {
+					return;
+				}
+			} else if (entity.column === 'Duration' && !/\d{4}-\d{2}-\d{2}/.test(input.value)) {
 				return;
 			}
 

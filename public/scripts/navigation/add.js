@@ -27,8 +27,12 @@ async function constructTable(sform, div) {
 		let textArea = document.createElement('textarea');
 		textArea.id = 'inp' + index;
 		textArea.dataset.index = index;
+		textArea.dataset.columnName = columnName;
 		if (!(columnName === 'Duration' && (sform === 'mis' || sform === 'ski'))) {
 			textArea.placeholder = 'This field cannot be empty';
+			if (columnName === 'Duration') {
+				textArea.placeholder += ' (Format YYYY-MM-DD)';
+			}
 			textArea.dataset.cannotBeEmpty = true;
 		}
 		div.append(textArea);
@@ -77,6 +81,8 @@ function renderAddTab() {
 					} else {
 						entity.columnNames.splice(el.dataset.index, 1);
 					}
+				} else if (el.dataset.columnName === 'Duration' && !/\d{4}-\d{2}-\d{2}/.test(el.value)) {
+					return;
 				} else {
 					entity.values[el.dataset.index] = `'${el.value}'`;
 				}
