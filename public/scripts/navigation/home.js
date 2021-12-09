@@ -351,7 +351,7 @@ function renderHomeTab() {
 
 	Object.entries(data)
 		.filter((el) => {
-			return (el[0] !== '_abb') && (el[0] !== '_col');	// To remove auxiliary tables
+			return (!el[0].startsWith('_'));	// To remove auxiliary tables
 		})
 		.map((el) => {
 			container.firstChild.append(addToJumpMenu(el[0], abbMap.get(el[0])));
