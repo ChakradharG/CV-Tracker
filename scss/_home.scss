@@ -85,10 +85,14 @@ table {
 			cursor: pointer;
 		}
 
-		& > button, .check-container {
+		& > .btn-container2, & > .check-container {
 			position: absolute;
 			left: 0.5rem;
 			bottom: 1rem;
+		}
+
+		.btn3 {
+			margin-right: 0.5rem;
 		}
 
 		.check-container {
@@ -98,7 +102,6 @@ table {
 
 		.btn-container {
 			position: absolute;
-			width: fit-content;
 			right: 0.5rem;
 			bottom: 1rem;
 		}

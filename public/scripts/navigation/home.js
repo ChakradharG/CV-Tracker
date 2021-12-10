@@ -207,13 +207,26 @@ function edit2(entity) {
 	div.append(input);
 
 	if (entity.column !== entity.collapsibleColumn) {
-		div.append(createButton('btn3', 'Delete Row', {
+		let btnContainer2 = document.createElement('div');
+		btnContainer2.className = 'btn-container2';
+
+		btnContainer2.append(createButton('btn3', 'Delete Row', {
 			ev: 'click',
 			callback: () => {
 				container.remove();
 				update('deleteData', entity);
 			}
 		}));
+
+		btnContainer2.append(createButton('btn4', 'Timeline', {
+			ev: 'click',
+			callback: () => {
+				renderTimelineTab();
+				window.location.href = `#${entity.tableID}${entity.id}`;
+			}
+		}));
+
+		div.append(btnContainer2);
 	}
 
 	let btnContainer = document.createElement('div');
