@@ -347,6 +347,7 @@ function renderHomeTab() {
 
 	const main = document.querySelector('main');
 	main.innerHTML = '';
+	main.scrollTo(0, 0);
 
 	let container = createModal();
 
