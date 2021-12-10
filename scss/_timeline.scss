@@ -19,6 +19,8 @@
 	border: 2px solid $fg-s;
 	width: clamp(280px, 40%, 500px);
 	padding: 0.5rem;
+	max-height: 200px;
+	overflow-y: scroll;
 
 	ul {
 		list-style-position: inside;
