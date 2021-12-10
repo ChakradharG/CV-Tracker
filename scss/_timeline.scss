@@ -1,0 +1,55 @@
+@use './globals' as *;
+
+
+.v-bar {
+	width: 2px;
+	background-color: $fg-s;
+	display: inline-block;
+	position: absolute;
+	right: 50%;
+}
+
+.hidden {
+	background: transparent;
+	height: 3rem;
+}
+
+.box {
+	position: absolute;
+	border: 2px solid $fg-s;
+	width: clamp(280px, 40%, 500px);
+	padding: 0.5rem;
+
+	ul {
+		list-style-position: inside;
+		word-break: break-word;
+	}
+
+	p:first-child {
+		font-weight: bold;
+	}
+}
+
+.left {
+	right: calc(50% + 20px);
+}
+
+.right {
+	left: calc(50% + 18px);
+}
+
+.circle {
+	fill: $fg;
+	height: 24px;
+	width: 24px;
+	position: absolute;
+	right: calc(50% - 11px);
+}
+
+.start {
+	transform: rotate(90deg);
+}
+
+.finish {
+	transform: rotate(-90deg);
+}
