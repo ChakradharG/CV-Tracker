@@ -5,7 +5,7 @@ function createTimelineBox({RL, offSet, entity}) {
 	box.id = entity.tableID + entity.id + (entity.SF === 'finish' ? 'f' : '');
 
 	Object.entries(entity).forEach(([ key, value ]) => {
-		if (key === 'id' || key === 'rowSpan' || key === 'SF') {
+		if (key.match(/(id)|(rowSpan)|(SF)|(tableID)/)) {
 			return;
 		}
 
@@ -22,14 +22,67 @@ function createTimelineBox({RL, offSet, entity}) {
 	box.addEventListener('click', () => {
 		let container = createModal();
 		let div = container.firstChild;
+		let text = document.createElement('div');
+		text.className = 'timeline-text-space';
+		div.append(text);
 
-		div.append(createButton('btn', 'Locate in Home Tab', {
+		Object.entries(entity).forEach(([ key, value ]) => {
+			if (key.match(/(id)|(rowSpan)|(SF)|(tableID)/)) {
+				return;
+			}
+	
+			let _ = document.createElement('p');
+			if (key === 'Duration') {
+				value = parseDurationString(value);
+			} else if (key === 'Level') {
+				value = parseLevel(value);
+			}
+			_.innerHTML = `<i style="color:var(--fg-s)">${key}:</i> ${value}`;
+			text.append(_);
+		});
+
+		let btnContainer2 = document.createElement('div');
+		btnContainer2.className = 'btn-container2';
+
+		btnContainer2.append(createButton('btn3', 'Locate in Home Tab', {
 			ev: 'click',
 			callback: () => {
 				renderHomeTab();
 				window.location.href = `#${entity.tableID}${entity.id}`;
 			}
 		}));
+
+		div.append(btnContainer2);
+
+		let btnContainer = document.createElement('div');
+		btnContainer.className = 'btn-container';
+
+		if (entity.SF === 'start') {
+			btnContainer.append(createButton('btn1', 'End of this event', {
+				ev: 'click',
+				callback: () => {
+					container.remove();
+					window.location.href = `#${entity.tableID}${entity.id}f`;
+				}
+			}));
+		} else if (entity.SF === 'finish') {
+			btnContainer.append(createButton('btn1', 'Start of this event', {
+				ev: 'click',
+				callback: () => {
+					container.remove();
+					window.location.href = `#${entity.tableID}${entity.id}`;
+				}
+			}));
+		}
+
+		btnContainer.append(createButton('btn2', 'Back', {
+			ev: 'click',
+			callback: () => {
+				container.remove();
+			}
+		}));
+
+		div.append(btnContainer);
 
 		document.querySelector('main').append(container);
 		container.style.display = 'flex';
@@ -67,6 +120,14 @@ function createVBar({offSet, height}) {
 	return vBar;
 }
 
+function createYearSep({offSet, year}) {
+	let yearSep = document.createElement('div');
+	yearSep.style.top = `${offSet}px`;
+	yearSep.id = `year${year}-year-sep`;
+
+	return yearSep;
+}
+
 function flattenData() {
 	let flatData = [];
 
@@ -76,8 +137,9 @@ function flattenData() {
 		})
 		.forEach(([ key, value ]) => {
 			value.forEach((row) => {
-				row.tableID = key;
-				flatData.push(row);
+				let _ = Object.assign({}, row);
+				_.tableID = key;
+				flatData.push(_);
 			});
 		});
 
@@ -98,14 +160,14 @@ function splitDuration(flatData) {
 				let r1 = {};
 				Object.assign(r1, row);
 				r1['Duration'] = row['Duration'].split(':')[0];
-				r1[Object.keys(r1)[2]] = '<i>Started:</i> ' + r1[Object.keys(r1)[2]];	// Remove?
+				r1[Object.keys(r1)[2]] = '<i style="color: var(--fg-s)">Start of:</i> ' + r1[Object.keys(r1)[2]];	// Remove?
 				r1.SF = 'start';
 				arr.push(r1);
 
 				let r2 = {};
 				Object.assign(r2, row);
 				r2['Duration'] = row['Duration'].split(':')[1];
-				r2[Object.keys(r2)[2]] = '<i>Finished:</i> ' + r2[Object.keys(r2)[2]];	// Remove?
+				r2[Object.keys(r2)[2]] = '<i style="color: var(--fg-s)">End of:</i> ' + r2[Object.keys(r2)[2]];	// Remove?
 				r2.SF = 'finish';
 				arr.push(r2);
 
@@ -141,12 +203,30 @@ function renderTimelineTab() {
 	main.innerHTML = '';
 	main.scrollTo(0, 0);
 
+	let container = createModal();
+
+	let yearDisp = document.createElement('div');
+	yearDisp.id = 'year-disp';
+	yearDisp.addEventListener('click', () => {
+		document.querySelector('.modal-container').style.display = 'flex';
+	});
+	main.append(yearDisp);
+
 	let offSet = +getComputedStyle(document.querySelector(':root')).getPropertyValue('font-size').replace('px', '');
+	let currYear;
+	let yearList = [];
 
 	sortRows(splitDuration(flattenData())).forEach((entity, index, arr) => {
 		let RL = (index % 2 === 0 ? 'left' : 'right');
 
 		let height = 100 + (new Date(arr[index+1]?.Duration) - new Date(arr[index].Duration))/86400000;
+
+		if (currYear !== (new Date(entity.Duration)).getFullYear()) {
+			currYear = (new Date(entity.Duration)).getFullYear();
+			main.append((createYearSep({offSet, year: currYear})));
+			yearList.push(currYear);
+			container.firstChild.append(addToJumpMenu(`year${currYear}-year-sep`, currYear));
+		}
 
 		main.append(createTimelineBox({RL, offSet, entity}));
 		main.append(createTimelineCircle({SF: entity.SF, offSet}));
@@ -155,8 +235,26 @@ function renderTimelineTab() {
 		offSet += height + 20;	// 20px for the circle
 	});
 
+	yearDisp.innerText = yearList[0];
+	main.addEventListener('scroll', () => {
+		for (let i = 1; i < yearList.length; i++) {
+			let yearSep = document.querySelector(`#year${yearList[i]}-year-sep`);
+			if (!yearSep) return;	// To avoid errors when scrolling in other tabs
+			yearOffSet = +yearSep.style.top.replace('px', '');
+			if (yearOffSet > main.scrollTop+main.offsetHeight) {
+				yearDisp.innerText = yearList[i-1];
+				break;
+			} else if (yearOffSet > main.scrollTop) {
+				yearDisp.innerText = yearList[i];
+				break;
+			}
+		}
+	})
+
 	let v = document.createElement('span');
 	v.classList = 'v-bar hidden';
 	v.style.top = `${main.scrollHeight}px`;
 	main.append(v);
+
+	main.append(container);
 }

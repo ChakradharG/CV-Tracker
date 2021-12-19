@@ -16,11 +16,11 @@
 
 .box {
 	position: absolute;
-	border: 2px solid $fg-s;
-	width: clamp(280px, 40%, 500px);
+	border: 1px solid $fg-s;
+	width: clamp(280px, 39%, 500px);
 	padding: 0.5rem;
 	max-height: 200px;
-	overflow-y: scroll;
+	overflow-y: auto;
 
 	ul {
 		list-style-position: inside;
@@ -29,6 +29,36 @@
 
 	p:first-child {
 		font-weight: bold;
+	}
+}
+
+[id$="-year-sep"] {
+	position: absolute;
+}
+
+#year-disp {
+	position: fixed;
+	right: 1rem;
+	top: calc(30px + 1rem);
+	border: 1px solid $fg-s;
+	padding: 0.5rem;
+	cursor: pointer;
+}
+
+@media only screen and (max-width: 929px) {
+	#year-disp {
+		display: none;
+	}
+}
+
+.timeline-text-space {
+	margin: 0.5rem 0 4rem 0;
+	text-align: left;
+	width: 25rem;
+
+	ul {
+		list-style-position: inside;
+		word-break: break-word;
 	}
 }
 
