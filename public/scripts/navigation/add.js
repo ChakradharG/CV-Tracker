@@ -52,7 +52,7 @@ function renderAddTab() {
 
 	let select = document.createElement('div');
 	select.className = 'select';
-	select.innerHTML = 'Select a Table &nbsp;⯆';
+	select.innerHTML = 'Select a Table';
 	select.addEventListener('click', () => {
 		container.style.display = 'flex';
 	});
@@ -99,7 +99,7 @@ function renderAddTab() {
 			let link = addToJumpMenu(el[1].sform, el[1].fform);
 
 			link.addEventListener('click', () => {
-				select.innerHTML = `${el[1].fform} &nbsp;⯆`;
+				select.innerHTML = `${el[1].fform}`;
 				select.dataset.id = el[1].sform;
 				constructTable(el[1].sform, div);
 				document.querySelector('.btn').style.display = 'block';
