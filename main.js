@@ -1,9 +1,6 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 
 require('./database/helpers')().then((_DB) => { global.DB = _DB });
-require('electron-reload')(__dirname);//, {
-// 	electron: require(`${__dirname}/node_modules/electron`)
-// });	// Remove
 
 
 let win;
@@ -20,8 +17,6 @@ function createWindow() {
 	});
 
 	win.loadFile(`${__dirname}/public/index.html`);
-	// win.removeMenu();	// Remove
-	win.webContents.openDevTools();	// Remove
 }
 
 app.whenReady().then(createWindow);

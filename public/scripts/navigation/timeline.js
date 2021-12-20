@@ -160,14 +160,14 @@ function splitDuration(flatData) {
 				let r1 = {};
 				Object.assign(r1, row);
 				r1['Duration'] = row['Duration'].split(':')[0];
-				r1[Object.keys(r1)[2]] = '<i style="color: var(--fg-s)">Start of:</i> ' + r1[Object.keys(r1)[2]];	// Remove?
+				r1[Object.keys(r1)[2]] = '<i style="color: var(--fg-s)">Start of:</i> ' + r1[Object.keys(r1)[2]];
 				r1.SF = 'start';
 				arr.push(r1);
 
 				let r2 = {};
 				Object.assign(r2, row);
 				r2['Duration'] = row['Duration'].split(':')[1];
-				r2[Object.keys(r2)[2]] = '<i style="color: var(--fg-s)">End of:</i> ' + r2[Object.keys(r2)[2]];	// Remove?
+				r2[Object.keys(r2)[2]] = '<i style="color: var(--fg-s)">End of:</i> ' + r2[Object.keys(r2)[2]];
 				r2.SF = 'finish';
 				arr.push(r2);
 
