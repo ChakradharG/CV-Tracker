@@ -233,10 +233,13 @@ table ul {
 .modal-container > div label {
   cursor: pointer;
 }
-.modal-container > div > button, .modal-container > div .check-container {
+.modal-container > div > .btn-container2, .modal-container > div > .check-container {
   position: absolute;
   left: 0.5rem;
   bottom: 1rem;
+}
+.modal-container > div .btn3 {
+  margin-right: 0.5rem;
 }
 .modal-container > div .check-container {
   padding: 0.5rem;
@@ -244,7 +247,6 @@ table ul {
 }
 .modal-container > div .btn-container {
   position: absolute;
-  width: fit-content;
   right: 0.5rem;
   bottom: 1rem;
 }
@@ -306,6 +308,87 @@ table ul {
 
 .select ~ .btn {
   margin: 3rem calc(2% + 1px) 3rem auto;
+}
+
+.v-bar {
+  width: 2px;
+  background-color: var(--fg-s);
+  display: inline-block;
+  position: absolute;
+  right: 50%;
+}
+
+.hidden {
+  background: transparent;
+  height: 3rem;
+}
+
+.box {
+  position: absolute;
+  border: 1px solid var(--fg-s);
+  width: clamp(280px, 39%, 500px);
+  padding: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.box ul {
+  list-style-position: inside;
+  word-break: break-word;
+}
+.box p:first-child {
+  font-weight: bold;
+}
+
+[id$=-year-sep] {
+  position: absolute;
+}
+
+#year-disp {
+  position: fixed;
+  right: 1rem;
+  top: calc(30px + 1rem);
+  border: 1px solid var(--fg-s);
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 929px) {
+  #year-disp {
+    display: none;
+  }
+}
+.timeline-text-space {
+  margin: 0.5rem 0 4rem 0;
+  text-align: left;
+  width: 25rem;
+}
+.timeline-text-space ul {
+  list-style-position: inside;
+  word-break: break-word;
+}
+
+.left {
+  right: calc(50% + 20px);
+}
+
+.right {
+  left: calc(50% + 18px);
+}
+
+.circle {
+  fill: var(--fg);
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  right: calc(50% - 11px);
+}
+
+.start {
+  transform: rotate(90deg);
+}
+
+.finish {
+  transform: rotate(-90deg);
 }
 
 * {
