@@ -1,12 +1,11 @@
 {
   "name": "cv-tracker",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "(Introduction, a bit bigger than description)",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "style": "sass --watch scss:public/styles",
-    "test": "mocha"
+    "style": "sass --watch scss:public/styles"
   },
   "repository": {
     "type": "git",
@@ -25,6 +24,6 @@
   "dependencies": {
     "electron": "^13.1.4",
     "sqlite": "^4.0.23",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "git@github.com:mapbox/node-sqlite3.git#3fb3715c4e699ca3bc19e47b136758c66f61e477"
   }
 }
