@@ -25,7 +25,7 @@ CREATE TABLE `_col` (
 );
 INSERT INTO `_col` VALUES('ach', 'Title');
 INSERT INTO `_col` VALUES('coc', 'Title');
-INSERT INTO `_col` VALUES('edu', NULL);
+INSERT INTO `_col` VALUES('edu', 'Institute');
 INSERT INTO `_col` VALUES('exp', 'Organization');
 INSERT INTO `_col` VALUES('ext', 'Title');
 INSERT INTO `_col` VALUES('int', 'Organization');
