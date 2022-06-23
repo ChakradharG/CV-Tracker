@@ -6,7 +6,7 @@ function convertToMap(arr) {
 
 function parseDurationString(duration) {
 	const [ start, end ] = duration.split(':').map((str) => {
-		return (new Date(str)).toDateString();
+		return (new Date(str.split('-'))).toDateString();
 	});
 
 	duration = (start === 'Invalid Date') ? start : `${start.slice(8, 10)} ${start.slice(4, 7)} ${start.slice(11, 15)}`;
