@@ -81,7 +81,7 @@ function renderAddTab() {
 					} else {
 						entity.columnNames.splice(el.dataset.index, 1);
 					}
-				} else if (el.dataset.columnName === 'Duration' && !/\d{4}-\d{2}-\d{2}/.test(el.value)) {
+				} else if (el.dataset.columnName === 'Duration' && !/\d{4}(-\d{2}(-\d{2})?)?/.test(el.value)) {
 					return;
 				} else {
 					entity.values[el.dataset.index] = `'${el.value}'`;
