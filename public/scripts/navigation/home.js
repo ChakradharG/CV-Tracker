@@ -246,7 +246,7 @@ function edit2(entity) {
 				if (cannotBeEmpty) {
 					return;
 				}
-			} else if (entity.column === 'Duration' && !/\d{4}-\d{2}-\d{2}/.test(input.value)) {
+			} else if (entity.column === 'Duration' && !/\d{4}(-\d{2}(-\d{2})?)?/.test(input.value)) {
 				return;
 			}
 
