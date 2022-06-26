@@ -6,13 +6,17 @@ function convertToMap(arr) {
 
 function parseDurationString(duration) {
 	const [ start, end ] = duration.split(':').map((str) => {
-		return (new Date(str.split('-'))).toDateString();
+		return (new Date(str)).toUTCString();
 	});
 
-	duration = (start === 'Invalid Date') ? start : `${start.slice(8, 10)} ${start.slice(4, 7)} ${start.slice(11, 15)}`;
+	const [ cntSt, cntEn ] = duration.split(':').map((str) => {
+		return str.split('-').length;
+	});
+
+	duration = (start === 'Invalid Date') ? start : `${cntSt === 3 ? start.slice(5, 7)+' ' : ''}${cntSt >= 2 ? start.slice(8, 11)+' ' : ''}${start.slice(12, 16)}`;
 	if (end) {
 		duration += ' - ';
-		duration += (end === 'Invalid Date') ? end : `${end.slice(8, 10)} ${end.slice(4, 7)} ${end.slice(11, 15)}`;
+		duration += (end === 'Invalid Date') ? end : `${cntEn === 3 ? end.slice(5, 7)+' ' : ''}${cntEn >= 2 ? end.slice(8, 11)+' ' : ''}${end.slice(12, 16)}`;
 	}
 
 	return duration;
