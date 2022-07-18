@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, shell } = require('electron');
 
 require('./database/helpers')().then((_DB) => { global.DB = _DB });
 
@@ -17,6 +17,10 @@ function createWindow() {
 	});
 
 	win.loadFile(`${__dirname}/public/index.html`);
+	win.webContents.on('new-window', (e, url) => {
+		e.preventDefault();
+		shell.openExternal(url);
+	});
 }
 
 app.whenReady().then(createWindow);
