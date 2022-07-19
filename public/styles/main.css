@@ -182,7 +182,7 @@ table, table th, table td {
 }
 table th, table td {
   padding: 0.5rem;
-  word-break: break-word;
+  /* word-break: break-word; */
 }
 table th {
   color: var(--fg-s);
@@ -399,7 +399,7 @@ table ul {
 }
 
 :root {
-  font-size: 18px;
+  font-size: 16px;
   /* Theme variables */
   --bg: #130227;
   --bg-s: #4a089b;
