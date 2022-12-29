@@ -48,13 +48,11 @@ function assignRowSpan(rows, column) {
 				return -1;
 			} else if (((r1['Duration']?.split(':')[1] ?? r1['Duration']?.split(':')[0])?.replace(/-/g, '') ?? null) < ((r2['Duration']?.split(':')[1] ?? r2['Duration']?.split(':')[0])?.replace(/-/g, '') ?? null)) {
 				return 1;
-			} else {
-				return 0;
 			}
-		} else {
-			// If neither exist then sort by the first column
-			return (r1[firstColumn] > r2[firstColumn]) - (r1[firstColumn] < r2[firstColumn]);
 		}
+
+		// If neither exist (or if 'Duration' is the same) then sort by the first column
+		return (r1[firstColumn] > r2[firstColumn]) - (r1[firstColumn] < r2[firstColumn]);
 	});
 
 	let count = 1;
