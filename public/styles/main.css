@@ -193,6 +193,9 @@ table th:first-child, table th:last-child {
 table ul {
   list-style-position: inside;
 }
+table ol {
+  list-style-position: inside;
+}
 
 .modal-container {
   position: fixed;
