@@ -338,6 +338,10 @@ table ol {
   list-style-position: inside;
   word-break: break-word;
 }
+.box ol {
+  list-style-position: inside;
+  word-break: break-word;
+}
 .box p:first-child {
   font-weight: bold;
 }
@@ -366,6 +370,10 @@ table ol {
   width: 25rem;
 }
 .timeline-text-space ul {
+  list-style-position: inside;
+  word-break: break-word;
+}
+.timeline-text-space ol {
   list-style-position: inside;
   word-break: break-word;
 }
