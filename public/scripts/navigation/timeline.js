@@ -20,7 +20,7 @@ function createTimelineBox({RL, offSet, entity}) {
 	});
 
 	box.addEventListener('click', () => {
-		let container = createModal();
+		let container = createModal(false);
 		let div = container.firstChild;
 		let text = document.createElement('div');
 		text.className = 'timeline-text-space';
@@ -61,7 +61,7 @@ function createTimelineBox({RL, offSet, entity}) {
 			btnContainer.append(createButton('btn1', 'End of this event', {
 				ev: 'click',
 				callback: () => {
-					container.remove();
+					container.click();
 					window.location.href = `#${entity.tableID}${entity.id}f`;
 				}
 			}));
@@ -69,7 +69,7 @@ function createTimelineBox({RL, offSet, entity}) {
 			btnContainer.append(createButton('btn1', 'Start of this event', {
 				ev: 'click',
 				callback: () => {
-					container.remove();
+					container.click();
 					window.location.href = `#${entity.tableID}${entity.id}`;
 				}
 			}));
@@ -78,7 +78,7 @@ function createTimelineBox({RL, offSet, entity}) {
 		btnContainer.append(createButton('btn2', 'Back', {
 			ev: 'click',
 			callback: () => {
-				container.remove();
+				container.click();
 			}
 		}));
 
@@ -203,7 +203,7 @@ function renderTimelineTab() {
 	main.innerHTML = '';
 	main.scrollTo(0, 0);
 
-	let container = createModal();
+	let container = createModal(true);
 
 	let yearDisp = document.createElement('div');
 	yearDisp.id = 'year-disp';

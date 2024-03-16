@@ -48,7 +48,7 @@ function renderAddTab() {
 	const main = document.querySelector('main');
 	main.innerHTML = '';
 
-	let container = createModal();
+	let container = createModal(true);
 
 	let select = document.createElement('div');
 	select.className = 'select';

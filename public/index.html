@@ -9,9 +9,19 @@
 	<script src="./scripts/navigation/home.js"></script>
 	<script src="./scripts/navigation/timeline.js"></script>
 	<script src="./scripts/navigation/add.js"></script>
+	<script src="./scripts/navigation/export.js"></script>
 
 	<script>
 		api.invoke('getData').then((_data) => { window.data = _data }).then(renderHomeTab);
+		function closeModals() {
+			Array.from(document.querySelectorAll('.modal-container'))
+				.filter((elem) => {
+					return elem.style.display !== 'none';
+				})
+				.forEach((elem) => {
+					elem.click();
+				});
+		}
 		window.addEventListener('blur', () => {
 			document.querySelectorAll('#titlebar *').forEach((elem) => {
 				elem.classList.add('blur');
@@ -21,6 +31,11 @@
 			document.querySelectorAll('#titlebar *').forEach((elem) => {
 				elem.classList.remove('blur');
 			});
+		});
+		window.addEventListener('keyup', (ev) => {
+			if (ev.key === 'Escape') {
+				closeModals();
+			}
 		});
 	</script>
 
@@ -36,6 +51,9 @@
 		</div>
 		<div class="navitem" title="Add" onclick="renderAddTab()">
 			<svg enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><g><rect fill="none" height="24" width="24"/></g><g><g><path d="M19,13h-6v6h-2v-6H5v-2h6V5h2v6h6V13z"/></g></g></svg>
+		</div>
+		<div class="navitem" title="Export" onclick="renderExportTab()">
+			<svg enable-background="new 0 0 24 24" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M440-320v-326L336-542l-56-58 200-200 200 200-56 58-104-104v326h-80ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z"/></svg>
 		</div>
 		<div class="navitem" title="Switch Theme" onclick="toggleTheme()">
 			<svg enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor" class="theme" id="dark-btn"><rect fill="none" height="24" width="24"/><path d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/></svg>

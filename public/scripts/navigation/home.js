@@ -75,16 +75,29 @@ function addToJumpMenu(id, heading) {
 	link.href = `#${id}`;
 	link.innerText = heading;
 	link.addEventListener('click', () => {
-		document.querySelector('.modal-container').style.display = 'none';
+		document.querySelector('.modal-container').click();
 	});
 
 	return link;
 }
 
-function createModal() {
+function createModal(persist) {
 	let modalContainer = document.createElement('div');
 	modalContainer.className = 'modal-container';
 	modalContainer.innerHTML = '<div></div>';
+	modalContainer.style.display = 'none';
+
+	modalContainer.addEventListener('click', (ev) => {
+		if (ev.target === modalContainer) {
+			if (persist) {
+				// hide the modal
+				modalContainer.style.display = 'none';
+			} else {
+				// delete the modal
+				modalContainer.remove();
+			}
+		}
+	});
 
 	return modalContainer;
 }
@@ -116,7 +129,7 @@ function update(method, entity, otherTab) {
 
 function edit1(entity) {
 	// For table & column names
-	let container = createModal();
+	let container = createModal(false);
 	let div = container.firstChild;
 
 	let input = document.createElement('input');
@@ -149,7 +162,7 @@ function edit1(entity) {
 	btnContainer.append(createButton('btn1', 'Cancel', {
 		ev: 'click',
 		callback: () => {
-			container.remove();
+			container.click();
 		}
 	}));
 
@@ -180,7 +193,7 @@ function edit1(entity) {
 				}
 			}
 
-			container.remove();
+			container.click();
 
 			if ((entity.oldValue !== entity.newValue) || flag) {
 				update('putData', entity);
@@ -196,7 +209,7 @@ function edit1(entity) {
 
 function edit2(entity) {
 	// For rows
-	let container = createModal();
+	let container = createModal(false);
 	let div = container.firstChild;
 
 	let cannotBeEmpty = !(entity.column === 'Duration' && (entity.tableID === 'mis' || entity.tableID === 'ski'));
@@ -215,7 +228,7 @@ function edit2(entity) {
 		btnContainer2.append(createButton('btn3', 'Delete Row', {
 			ev: 'click',
 			callback: () => {
-				container.remove();
+				container.click();
 				update('deleteData', entity);
 			}
 		}));
@@ -237,7 +250,7 @@ function edit2(entity) {
 	btnContainer.append(createButton('btn1', 'Cancel', {
 		ev: 'click',
 		callback: () => {
-			container.remove();
+			container.click();
 		}
 	}));
 
@@ -253,7 +266,7 @@ function edit2(entity) {
 			}
 
 			entity.newValue = input.value || null;
-			container.remove();
+			container.click();
 
 			if ((entity.oldValue !== entity.newValue)) {
 				update('putData', entity);
@@ -364,7 +377,7 @@ function renderHomeTab() {
 	main.innerHTML = '';
 	main.scrollTo(0, 0);
 
-	let container = createModal();
+	let container = createModal(true);
 
 	const abbMap = convertToMap(data._abb);
 	const colMap = convertToMap(data._col);
@@ -373,12 +386,9 @@ function renderHomeTab() {
 		.filter((el) => {
 			return (!el[0].startsWith('_'));	// To remove auxiliary tables
 		})
-		.map((el) => {
-			container.firstChild.append(addToJumpMenu(el[0], abbMap.get(el[0])));
-			return constructSection(el, abbMap.get(el[0]), colMap.get(el[0]));
-		})
 		.forEach((el) => {
-			main.append(el);
+			container.firstChild.append(addToJumpMenu(el[0], abbMap.get(el[0])));
+			main.append(constructSection(el, abbMap.get(el[0]), colMap.get(el[0])));
 		});
 
 	main.append(container);

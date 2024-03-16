@@ -1,4 +1,6 @@
 const { app, BrowserWindow, ipcMain, shell } = require('electron');
+const fs = require('fs').promises;
+const path = require('path');
 
 require('./database/helpers')().then((_DB) => { global.DB = _DB });
 
@@ -21,6 +23,17 @@ function createWindow() {
 		e.preventDefault();
 		shell.openExternal(url);
 	});
+}
+
+async function exportTables(content) {
+	try {
+		const exportDir = path.join(__dirname, 'exports');
+		await fs.mkdir(exportDir, { recursive: true });
+		await fs.writeFile(path.join(exportDir, 'CV.html'), content, 'utf8');
+		shell.openPath(exportDir);
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 app.whenReady().then(createWindow);
@@ -63,4 +76,8 @@ ipcMain.on('putData', (_, payLoad) => {
 
 ipcMain.on('deleteData', (_, payLoad) => {
 	DB.remove(JSON.parse(payLoad));
+});
+
+ipcMain.on('exportTables', (_, payLoad) => {
+	exportTables(JSON.parse(payLoad).content);
 });

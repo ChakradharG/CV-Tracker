@@ -9,7 +9,7 @@ contextBridge.exposeInMainWorld('api', {
 		}
 	},
 	send: (channel, payLoad) => {
-		let validChannels = ['winManip', 'postData', 'putData', 'deleteData'];
+		let validChannels = ['winManip', 'postData', 'putData', 'deleteData', 'exportTables'];
 		if (validChannels.includes(channel)) {
 			ipcRenderer.send(channel, payLoad);
 		}
