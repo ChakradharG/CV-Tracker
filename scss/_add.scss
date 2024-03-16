@@ -21,10 +21,6 @@
 		width: calc(98% - 1px);	// Hack for weird difference ( < 1) between table width and textarea width
 		margin-bottom: 1rem;
 	}
-
-	label {
-		cursor: pointer;
-	}
 }
 
 .select ~ .btn {

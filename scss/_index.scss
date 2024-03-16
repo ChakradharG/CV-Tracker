@@ -26,7 +26,7 @@ nav {
 	user-select: none;	// To prevent selection of text on double click
 	cursor: pointer;
 
-	&:last-child {
+	&:nth-child(4) {
 		margin-top: auto;
 	}
 
@@ -153,6 +153,107 @@ main {
 		&:hover {
 			color: $bg-s;
 			border-color: $bg-s;
+		}
+	}
+
+	input[type=checkbox] {
+		position: relative;
+		height: 0.9rem;
+		margin-left: 0.5rem;
+		width: 1.2rem;
+		cursor: pointer;
+	
+		&::before, &:checked::before {
+			content: "";
+			display: block;
+			position: absolute;
+			background-color:$bg-s;
+			width: 1.2rem;
+			height: 1.2rem;
+			top: 0;
+			right: 0;
+		}
+	
+		&:checked::after {
+			content: "";
+			display: block;
+			position: absolute;
+			transform: rotate(45deg);
+			border: solid $fg;
+			border-width: 0 2px 2px 0;
+			width: 0.3rem;
+			height: 0.6rem;
+			top: 0.13rem;
+			left: 0.4rem;
+		}
+	}
+
+	label {
+		cursor: pointer;
+	}
+
+	.modal-container {
+		position: fixed;
+		inset: $tb-height 0 0 4rem;
+		justify-content: center;
+		align-items: center;
+
+		& > div {
+			background-color: $bg;
+			position: relative;
+			padding: 0.5rem;
+			min-width: 25rem;
+			min-height: 8rem;
+			box-shadow: $fg 0px 0px 230px -50px;
+			animation: pop 0.25s;
+			text-align: center;
+			transition: background-color 0.5s ease;
+
+			a {
+				display: block;
+				text-decoration: none;
+				margin: 1rem 0;
+			}
+
+			textarea, input[type=text] {
+				color: $fg;
+				border: 1px solid $fg-s;
+				padding: 0.5rem;
+				outline: none;
+				width: 100%;
+				background-color: transparent;
+				margin: 0.5rem 0 4rem 0;
+			}
+
+			textarea {
+				resize: vertical;
+				height: 8rem;
+			}
+
+			& > .btn-container2, & > .check-container {
+				position: absolute;
+				left: 0.5rem;
+				bottom: 1rem;
+			}
+
+			.btn3 {
+				margin-right: 0.5rem;
+			}
+
+			.check-container {
+				padding: 0.5rem;
+				bottom: calc(1rem + 1px);	// To bring label in line with the buttons (Due to 2px of border)
+			}
+
+			.btn-container {
+				position: absolute;
+				right: 0.5rem;
+				bottom: 1rem;
+			}
+
+			.btn1 {
+				margin-right: 0.5rem;
+			}
 		}
 	}
 }
