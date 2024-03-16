@@ -95,7 +95,7 @@ function renderAddTab() {
 	document.querySelector('.btn').style.display = 'none';
 
 	Object.entries(data._abb)
-		.map((el) => {
+		.forEach((el) => {
 			let link = addToJumpMenu(el[1].sform, el[1].fform);
 
 			link.addEventListener('click', () => {

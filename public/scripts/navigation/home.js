@@ -131,6 +131,7 @@ function edit1(entity) {
 	// For table & column names
 	let container = createModal(false);
 	let div = container.firstChild;
+	div.classList.add('edit-modal');
 
 	let input = document.createElement('input');
 	input.type = 'text';
@@ -211,6 +212,7 @@ function edit2(entity) {
 	// For rows
 	let container = createModal(false);
 	let div = container.firstChild;
+	div.classList.add('edit-modal');
 
 	let cannotBeEmpty = !(entity.column === 'Duration' && (entity.tableID === 'mis' || entity.tableID === 'ski'));
 
