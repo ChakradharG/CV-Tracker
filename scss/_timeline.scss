@@ -43,6 +43,13 @@
 	border: 1px solid $fg-s;
 	padding: 0.5rem;
 	cursor: pointer;
+	user-select: none;
+	transition: 0.25s ease;
+
+	&:hover {
+		color: $bg-s;
+		border-color: $bg-s;
+	}
 }
 
 @media only screen and (max-width: 929px) {

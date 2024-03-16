@@ -7,6 +7,13 @@
 	margin: 1.2rem auto 3rem auto;
 	width: fit-content;
 	border: 1px solid $fg-s;
+	user-select: none;
+	transition: 0.25s ease;
+
+	&:hover {
+		color: $bg-s;
+		border-color: $bg-s;
+	}
 }
 
 .input-fields {
