@@ -19,7 +19,7 @@ function createTimelineBox({RL, offSet, entity}) {
 		box.append(_);
 	});
 
-	box.addEventListener('click', () => {
+	box.addEventListener('contextmenu', () => {
 		let container = createModal(false);
 		let div = container.firstChild;
 		let text = document.createElement('div');
