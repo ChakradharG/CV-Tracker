@@ -196,10 +196,16 @@ function sortRows(flatData) {
 }
 
 function renderTimelineTab() {
+	const main = document.querySelector('main');
+
+	if (document.querySelector('.current').title === 'Timeline') {
+		main.scrollTo(0, 0);
+		return;
+	}
+
 	document.querySelector('.current').classList.remove('current');
 	document.querySelector('[title="Timeline"]').classList.add('current');
 
-	const main = document.querySelector('main');
 	main.innerHTML = '';
 	main.scrollTo(0, 0);
 

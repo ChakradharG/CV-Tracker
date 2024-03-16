@@ -372,10 +372,17 @@ function constructSection(element, heading, collapsibleColumn) {
 }
 
 function renderHomeTab() {
-	document.querySelector('.current').classList.remove('current');
+	const main = document.querySelector('main');
+
+	if (document.querySelector('.current')?.title === 'Home') {
+		// If already on the Home tab, just scroll to the top
+		main.scrollTo(0, 0);
+		return;
+	}
+
+	document.querySelector('.current')?.classList.remove('current');
 	document.querySelector('[title="Home"]').classList.add('current');
 
-	const main = document.querySelector('main');
 	main.innerHTML = '';
 	main.scrollTo(0, 0);
 
