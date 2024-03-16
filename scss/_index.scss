@@ -204,6 +204,7 @@ main {
 			padding: 0.5rem;
 			min-width: 25rem;
 			min-height: 8rem;
+			overflow-y: auto;
 			box-shadow: $fg 0px 0px 230px -50px;
 			animation: pop 0.25s;
 			text-align: center;

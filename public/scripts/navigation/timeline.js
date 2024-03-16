@@ -204,6 +204,7 @@ function renderTimelineTab() {
 	main.scrollTo(0, 0);
 
 	let container = createModal(true);
+	container.firstChild.style.maxHeight = 'calc(100% - 1rem)';
 
 	let yearDisp = document.createElement('div');
 	yearDisp.id = 'year-disp';
