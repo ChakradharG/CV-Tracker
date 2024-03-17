@@ -19,7 +19,11 @@ function createWindow() {
 	});
 
 	win.loadFile(`${__dirname}/public/index.html`);
-	win.webContents.on('new-window', (e, url) => {
+	win.webContents.setWindowOpenHandler(({ url }) => {
+		shell.openExternal(url);
+		return { action: 'deny' };
+	});
+	win.webContents.on('will-navigate', (e, url) => {
 		e.preventDefault();
 		shell.openExternal(url);
 	});
