@@ -4,15 +4,9 @@ This application lets you create and manage a pool of all of your achievements. 
 <br>
 
 ## Getting Started
-* Clone this repository
+* Clone this repository `git clone https://github.com/ChakradharG/CV-Tracker.git`
 * `cd CV-Tracker`
 * `npm install` to install dependencies
-* `cd database` and execute either `node DB-blank.js` or `sqlite3 DB.db < DB-blank.sql` (requires the [SQLite command-line tools](https://sqlite.org/download.html) to work) to setup a blank database and its schema
-* You can also use the following commands to setup a blank database and its schema
-```
-sqlite3 DB.db
-.read DB-blank.sql
-```
 * Edit `package.json` and set the icon's extension depending upon your OS (`.ico` for Windows, `.png` for Linux and `.icns` for MacOS)
 * `npm run make`
 * The executable application will be created in the `CV-Tracker/out/cv-tracker-{architecture}/` directory
