@@ -40,7 +40,7 @@ function renderExportTab() {
 		})
 		.forEach((el) => {
 			let id = el[0];
-			el[0] += '_hidden';	// Prevent conflicting element IDs with actual tables
+			el[0] += '-hidden';	// Prevent conflicting element IDs with actual tables
 			div.append(constructSection(el, abbMap.get(id), colMap.get(id)));
 		});
 
@@ -73,7 +73,7 @@ function renderExportTab() {
 				})
 				.map((sform) => {
 					let heading = '<h2>' + abbMap.get(sform) + '</h2>';
-					let table = '<table>' + document.querySelector(`.modal-container #${sform}_hidden + table`).innerHTML + '</table>';
+					let table = '<table>' + document.querySelector(`.modal-container #${sform}-hidden + table`).innerHTML + '</table>';
 					return heading + table;
 				})
 				.reduce((a, b) => {
