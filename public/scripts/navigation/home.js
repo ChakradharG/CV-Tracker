@@ -289,7 +289,7 @@ function constructSection(element, heading, collapsibleColumn) {
 	sectionHeading.innerText = heading;
 	sectionHeading.id = element[0];
 	sectionHeading.addEventListener('click', () => {
-		document.querySelector('.modal-container').style.display = 'flex';
+		document.querySelector('#modal-container-tables').style.display = 'flex';
 	});
 	sectionHeading.title = 'Right click to edit';
 	sectionHeading.addEventListener('contextmenu', () => {
@@ -387,6 +387,7 @@ function renderHomeTab() {
 	main.scrollTo(0, 0);
 
 	let container = createModal(true);
+	container.id = 'modal-container-tables';
 
 	const abbMap = convertToMap(data._abb);
 	const colMap = convertToMap(data._col);
