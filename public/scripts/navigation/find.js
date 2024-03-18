@@ -17,7 +17,7 @@ function filterRows(queryText) {
 			el[1] = el[1].filter((row) => {
 				let showRow = false;
 				for (let key in row) {
-					if (key === 'id' || key === 'rowSpan') {
+					if (key === 'id' || key === 'rowSpan' || key === 'embedding' || key === 'is_incld' || key === 'recomp') {
 						continue;
 					}
 					if (row[key]?.toLowerCase?.().includes(queryText)) {	// row[key] could be string/null/number

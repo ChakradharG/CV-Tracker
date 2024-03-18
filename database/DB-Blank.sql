@@ -40,7 +40,10 @@ CREATE TABLE `ach` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
 	`Title` TEXT NOT NULL,
 	`Description` TEXT NOT NULL,
-	`Duration` TEXT NOT NULL
+	`Duration` TEXT NOT NULL,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `coc`;
@@ -48,16 +51,22 @@ CREATE TABLE `coc` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
 	`Title` TEXT NOT NULL,
 	`Description` TEXT NOT NULL,
-	`Duration` TEXT NOT NULL
+	`Duration` TEXT NOT NULL,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `edu`;
 CREATE TABLE `edu` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
-	`Title` TEXT NOT NULL,
 	`Institute` TEXT NOT NULL,
+	`Description` TEXT NOT NULL,
 	`GPA/%` REAL NOT NULL,
-	`Duration` TEXT NOT NULL
+	`Duration` TEXT NOT NULL,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `exp`;
@@ -66,7 +75,10 @@ CREATE TABLE `exp` (
 	`Organization` TEXT NOT NULL,
 	`Position` TEXT NOT NULL,
 	`Description` TEXT NOT NULL,
-	`Duration` TEXT NOT NULL
+	`Duration` TEXT NOT NULL,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `ext`;
@@ -74,7 +86,10 @@ CREATE TABLE `ext` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
 	`Title` TEXT NOT NULL,
 	`Description` TEXT NOT NULL,
-	`Duration` TEXT NOT NULL
+	`Duration` TEXT NOT NULL,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `int`;
@@ -82,7 +97,10 @@ CREATE TABLE `int` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
 	`Organization` TEXT NOT NULL,
 	`Description` TEXT NOT NULL,
-	`Duration` TEXT NOT NULL
+	`Duration` TEXT NOT NULL,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `mis`;
@@ -90,14 +108,20 @@ CREATE TABLE `mis` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
 	`Title` TEXT NOT NULL,
 	`Description` TEXT NOT NULL,
-	`Duration` TEXT
+	`Duration` TEXT,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `per`;
 CREATE TABLE `per` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
 	`Title` TEXT NOT NULL,
-	`Description` TEXT NOT NULL
+	`Description` TEXT NOT NULL,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `pro`;
@@ -105,7 +129,10 @@ CREATE TABLE `pro` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
 	`Title` TEXT NOT NULL,
 	`Description` TEXT NOT NULL,
-	`Duration` TEXT NOT NULL
+	`Duration` TEXT NOT NULL,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `ski`;
@@ -114,7 +141,10 @@ CREATE TABLE `ski` (
 	`Domain` TEXT NOT NULL,
 	`Skill` TEXT NOT NULL,
 	`Level` INTEGER NOT NULL,
-	`Duration` TEXT
+	`Duration` TEXT,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 DROP TABLE IF EXISTS `tra`;
@@ -122,7 +152,10 @@ CREATE TABLE `tra` (
 	`id` INTEGER PRIMARY KEY NOT NULL,
 	`Title` TEXT NOT NULL,
 	`Description` TEXT NOT NULL,
-	`Duration` TEXT NOT NULL
+	`Duration` TEXT NOT NULL,
+	`embedding` TEXT,
+	`is_incld` INTEGER DEFAULT 1 NOT NULL,
+	`recomp` INTEGER DEFAULT 0 NOT NULL
 );
 
 COMMIT;

@@ -5,7 +5,7 @@ function createTimelineBox({RL, offSet, entity}) {
 	box.id = entity.tableID + entity.id + (entity.SF === 'finish' ? 'f' : '');
 
 	Object.entries(entity).forEach(([ key, value ]) => {
-		if (key.match(/(id)|(rowSpan)|(SF)|(tableID)/)) {
+		if (key.match(/(id)|(rowSpan)|(SF)|(tableID)|(embedding)|(is_incld)|(recomp)/)) {
 			return;
 		}
 
@@ -27,7 +27,7 @@ function createTimelineBox({RL, offSet, entity}) {
 		div.append(text);
 
 		Object.entries(entity).forEach(([ key, value ]) => {
-			if (key.match(/(id)|(rowSpan)|(SF)|(tableID)/)) {
+			if (key.match(/(id)|(rowSpan)|(SF)|(tableID)|(embedding)|(is_incld)|(recomp)/)) {
 				return;
 			}
 	
@@ -215,7 +215,7 @@ function renderTimelineTab() {
 	let yearDisp = document.createElement('div');
 	yearDisp.id = 'year-disp';
 	yearDisp.addEventListener('click', () => {
-		document.querySelector('.modal-container').style.display = 'flex';
+		container.style.display = 'flex';
 	});
 	main.append(yearDisp);
 

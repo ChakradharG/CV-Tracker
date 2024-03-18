@@ -272,6 +272,12 @@ function edit2(entity) {
 
 			if ((entity.oldValue !== entity.newValue)) {
 				update('putData', entity);
+
+				if (entity.column === 'Description' || (entity.tableID === 'ski' && entity.column === 'Skill')) {
+					entity.column = 'recomp';
+					entity.newValue = 1;
+					update('putData', entity);
+				}
 			}
 		}
 	}));
@@ -311,20 +317,24 @@ function constructSection(element, heading, collapsibleColumn) {
 
 	let hRow = document.createElement('tr');	// Head
 	Object.keys(rows[0]).forEach((key) => {
-		if (key === 'id' || key === 'rowSpan') {
+		if (key === 'id' || key === 'rowSpan' || key === 'embedding' || key === 'is_incld' || key === 'recomp') {
 			return;
 		}
 		let _ = document.createElement('th');
 		_.innerText = key;
-		_.title = 'Right click to edit';
-		_.addEventListener('contextmenu', () => {
-			edit1({
-				type: 'column',
-				tableID: element[0],
-				oldValue: key,
-				collapsibleColumn: collapsibleColumn
+		if (key === 'Description' || ((element[0] === 'ski' || element[0] === 'ski-hidden') && key === 'Skill')) {
+			_.title = 'Not Editable';
+		} else {
+			_.title = 'Right click to edit';
+			_.addEventListener('contextmenu', () => {
+				edit1({
+					type: 'column',
+					tableID: element[0],
+					oldValue: key,
+					collapsibleColumn: collapsibleColumn
+				});
 			});
-		});
+		}
 		hRow.append(_);
 	});
 	table.append(hRow);
@@ -335,7 +345,7 @@ function constructSection(element, heading, collapsibleColumn) {
 		bRow.id = element[0] + row['id'];
 		Object.entries(row).forEach(([ key, value ]) => {
 			let _ = document.createElement('td');
-			if (key === 'id' || key === 'rowSpan') {
+			if (key === 'id' || key === 'rowSpan' || key === 'embedding' || key === 'is_incld' || key === 'recomp') {
 				return;
 			} else if (key === collapsibleColumn) {
 				if (row.rowSpan === 0) {
