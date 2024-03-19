@@ -14,7 +14,7 @@ async function constructTable(sform, div) {
 
 	let index = 0;
 	columnNames.forEach((columnName) => {
-		if (columnName === 'id' || columnName === 'rowSpan') {
+		if (columnName === 'id' || columnName === 'rowSpan' || columnName === 'embedding' || columnName === 'is_incld' || columnName === 'recomp') {
 			return;
 		}
 
@@ -39,6 +39,22 @@ async function constructTable(sform, div) {
 
 		index++;
 	});
+
+	let _ = document.createElement('div');
+	_.className = 'check-container';
+
+	let checkbox = document.createElement('input');
+	checkbox.id = 'isIncluded';
+	checkbox.type = 'checkbox';
+	checkbox.checked = true;
+
+	let label = document.createElement('label');
+	label.htmlFor = 'isIncluded';
+	label.innerText = 'Include in matches';
+
+	_.append(label);
+	_.append(checkbox);
+	div.append(_);
 }
 
 function renderAddTab() {
@@ -72,6 +88,7 @@ function renderAddTab() {
 			document.querySelectorAll('label').forEach((el) => {
 				entity.columnNames[el.dataset.index] = `'${el.innerText}'`;
 			});
+			entity.columnNames.push('is_incld');
 
 			entity.values = [];
 			for (let el of document.querySelectorAll('textarea')) {
@@ -87,6 +104,7 @@ function renderAddTab() {
 					entity.values[el.dataset.index] = `'${el.value}'`;
 				}
 			}
+			entity.values.push(+document.querySelector('#isIncluded').checked);
 
 			update('postData', entity, true);
 			constructTable(select.dataset.id, div);

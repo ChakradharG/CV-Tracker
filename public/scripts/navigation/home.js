@@ -228,7 +228,7 @@ function edit2(entity) {
 
 		let label = document.createElement('label');
 		label.htmlFor = 'isIncluded';
-		label.innerText = 'Include in Matches';
+		label.innerText = 'Include in matches';
 
 		_.append(label);
 		_.append(checkbox);
