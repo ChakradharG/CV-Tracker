@@ -215,6 +215,25 @@ function edit2(entity) {
 	div.classList.add('edit-modal');
 
 	let cannotBeEmpty = !(entity.column === 'Duration' && (entity.tableID === 'mis' || entity.tableID === 'ski'));
+	let usedToEmbed = (entity.column === 'Description' || (entity.tableID === 'ski' && entity.column === 'Skill'));
+
+	if (usedToEmbed) {
+		let _ = document.createElement('div');
+		_.className = 'check-container';
+
+		let checkbox = document.createElement('input');
+		checkbox.id = 'isIncluded';
+		checkbox.type = 'checkbox';
+		checkbox.checked = entity.isIncluded;
+
+		let label = document.createElement('label');
+		label.htmlFor = 'isIncluded';
+		label.innerText = 'Include in Matches';
+
+		_.append(label);
+		_.append(checkbox);
+		div.append(_);
+	}
 
 	let input = document.createElement('textarea');
 	input.value = entity.oldValue;
@@ -223,11 +242,11 @@ function edit2(entity) {
 	}
 	div.append(input);
 
-	if (entity.column !== entity.collapsibleColumn) {
-		let btnContainer2 = document.createElement('div');
-		btnContainer2.className = 'btn-container2';
+	let btnContainer = document.createElement('div');
+	btnContainer.className = 'btn-container';
 
-		btnContainer2.append(createButton('btn3', 'Delete Row', {
+	if (entity.column !== entity.collapsibleColumn) {
+		btnContainer.append(createButton('btn1', 'Delete Row', {
 			ev: 'click',
 			callback: () => {
 				container.click();
@@ -235,19 +254,14 @@ function edit2(entity) {
 			}
 		}));
 
-		btnContainer2.append(createButton('btn4', 'Timeline', {
+		btnContainer.append(createButton('btn1', 'Timeline', {
 			ev: 'click',
 			callback: () => {
 				renderTimelineTab();
 				window.location.href = `#${entity.tableID}${entity.id}`;
 			}
 		}));
-
-		div.append(btnContainer2);
 	}
-
-	let btnContainer = document.createElement('div');
-	btnContainer.className = 'btn-container';
 
 	btnContainer.append(createButton('btn1', 'Cancel', {
 		ev: 'click',
@@ -273,9 +287,18 @@ function edit2(entity) {
 			if ((entity.oldValue !== entity.newValue)) {
 				update('putData', entity);
 
-				if (entity.column === 'Description' || (entity.tableID === 'ski' && entity.column === 'Skill')) {
+				if (usedToEmbed) {
 					entity.column = 'recomp';
 					entity.newValue = 1;
+					update('putData', entity);
+				}
+			}
+
+			if (usedToEmbed) {
+				let _ = div.querySelector('input[type="checkbox"]');
+				if (_.checked !== entity.isIncluded) {
+					entity.column = 'is_incld';
+					entity.newValue = +_.checked;
 					update('putData', entity);
 				}
 			}
@@ -361,7 +384,8 @@ function constructSection(element, heading, collapsibleColumn) {
 					oldValue: row[key],
 					column: key,
 					id: row['id'],
-					collapsibleColumn: collapsibleColumn
+					collapsibleColumn: collapsibleColumn,
+					isIncluded: Boolean(row['is_incld'])
 				});
 			});
 			if (key === 'Level') {	// Special column
