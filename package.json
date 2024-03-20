@@ -31,6 +31,7 @@
     "eslint": "^7.29.0"
   },
   "dependencies": {
+    "openai": "^4.85.1",
     "sqlite": "^4.0.23",
     "sqlite3": "git@github.com:mapbox/node-sqlite3.git#3fb3715c4e699ca3bc19e47b136758c66f61e477"
   },

@@ -7,7 +7,6 @@ function filterRows(queryText) {
 
 	let container = document.querySelector('#modal-container-tables');
 	container.firstChild.innerHTML = '';
-	let containerFind = document.querySelector('#modal-container-find');
 
 	Object.entries(data)
 		.filter((el) => {

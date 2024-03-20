@@ -29,6 +29,22 @@ module.exports = async function () {
 		};
 	};
 
+	DB.getPending = async function() {
+		return {
+			ach: await this.db.all('SELECT * FROM ach WHERE recomp = 1 AND is_incld = 1'),
+			coc: await this.db.all('SELECT * FROM coc WHERE recomp = 1 AND is_incld = 1'),
+			edu: await this.db.all('SELECT * FROM edu WHERE recomp = 1 AND is_incld = 1'),
+			exp: await this.db.all('SELECT * FROM exp WHERE recomp = 1 AND is_incld = 1'),
+			ext: await this.db.all('SELECT * FROM ext WHERE recomp = 1 AND is_incld = 1'),
+			int: await this.db.all('SELECT * FROM int WHERE recomp = 1 AND is_incld = 1'),
+			mis: await this.db.all('SELECT * FROM mis WHERE recomp = 1 AND is_incld = 1'),
+			per: await this.db.all('SELECT * FROM per WHERE recomp = 1 AND is_incld = 1'),
+			pro: await this.db.all('SELECT * FROM pro WHERE recomp = 1 AND is_incld = 1'),
+			ski: await this.db.all('SELECT * FROM ski WHERE recomp = 1 AND is_incld = 1'),
+			tra: await this.db.all('SELECT * FROM tra WHERE recomp = 1 AND is_incld = 1'),
+		};
+	};
+
 	DB.getCol = async function(table) {
 		return await this.db.all(`PRAGMA table_info(${table})`);
 	};

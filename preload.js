@@ -3,7 +3,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
 	invoke: (channel, payLoad) => {
-		let validChannels = ['getData', 'getColumns'];
+		let validChannels = ['getData', 'getColumns', 'computeEmbeddings'];
 		if (validChannels.includes(channel)) {
 			return ipcRenderer.invoke(channel, payLoad);
 		}
