@@ -23,7 +23,7 @@ nav {
   user-select: none;
   cursor: pointer;
 }
-.navitem:last-child {
+.navitem:nth-child(6) {
   margin-top: auto;
 }
 .navitem svg {
@@ -105,7 +105,7 @@ a {
   fill: var(--fg);
 }
 #titlebar .ctrl-btns .minimize:hover {
-  background-color: #9e9e9e28;
+  background-color: rgba(158, 158, 158, 0.1568627451);
 }
 #titlebar .ctrl-btns .minimize:hover .blur, #titlebar .ctrl-btns .minimize:hover svg {
   fill: var(--fg);
@@ -139,6 +139,95 @@ main button:hover {
   color: var(--bg-s);
   border-color: var(--bg-s);
 }
+main input[type=checkbox] {
+  position: relative;
+  height: 0.9rem;
+  margin-left: 0.5rem;
+  width: 1.2rem;
+  cursor: pointer;
+}
+main input[type=checkbox]::before, main input[type=checkbox]:checked::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: var(--bg-s);
+  width: 1.2rem;
+  height: 1.2rem;
+  top: 0;
+  right: 0;
+}
+main input[type=checkbox]:checked::after {
+  content: "";
+  display: block;
+  position: absolute;
+  transform: rotate(45deg);
+  border: solid var(--fg);
+  border-width: 0 2px 2px 0;
+  width: 0.3rem;
+  height: 0.6rem;
+  top: 0.13rem;
+  left: 0.4rem;
+}
+main label {
+  cursor: pointer;
+}
+main .modal-container {
+  position: fixed;
+  inset: 30px 0 0 4rem;
+  justify-content: center;
+  align-items: center;
+}
+main .modal-container > div {
+  background-color: var(--bg);
+  position: relative;
+  padding: 0.5rem;
+  min-width: 25rem;
+  min-height: 8rem;
+  overflow-y: auto;
+  box-shadow: var(--fg) 0px 0px 230px -50px;
+  animation: pop 0.25s;
+  text-align: center;
+  transition: background-color 0.5s ease;
+}
+main .modal-container > div a {
+  display: block;
+  text-decoration: none;
+  margin: 1rem 0;
+}
+main .modal-container > div textarea, main .modal-container > div input[type=text] {
+  color: var(--fg);
+  border: 1px solid var(--fg-s);
+  padding: 0.5rem;
+  outline: none;
+  width: 100%;
+  background-color: transparent;
+  margin: 0.5rem 0 4rem 0;
+}
+main .modal-container > div textarea {
+  resize: vertical;
+  height: 12rem;
+  width: 45rem;
+}
+main .modal-container > div > .btn-container2, main .modal-container > div > .check-container {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 1rem;
+}
+main .modal-container > div .btn3 {
+  margin-right: 0.5rem;
+}
+main .modal-container > div .check-container {
+  padding: 0.5rem;
+  bottom: calc(1rem + 1px);
+}
+main .modal-container > div .btn-container {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 1rem;
+}
+main .modal-container > div .btn1 {
+  margin-right: 0.5rem;
+}
 
 ::-webkit-scrollbar {
   width: 0.5rem;
@@ -160,13 +249,13 @@ main button:hover {
   opacity: 0.7;
 }
 
-main > section {
+main section {
   margin-bottom: 3rem;
 }
-main > section:first-child {
+main section:first-child {
   margin-top: 1rem;
 }
-main > section h2 {
+main section h2 {
   margin-bottom: 1rem;
   cursor: pointer;
   display: inline-block;
@@ -182,7 +271,6 @@ table, table th, table td {
 }
 table th, table td {
   padding: 0.5rem;
-  /* word-break: break-word; */
 }
 table th {
   color: var(--fg-s);
@@ -190,100 +278,12 @@ table th {
 table th:first-child, table th:last-child {
   width: clamp(8rem, 20vw, 20rem);
 }
-table ul {
-  list-style-position: inside;
-}
-table ol {
+table ul, table ol {
   list-style-position: inside;
 }
 
-.modal-container {
-  position: fixed;
-  inset: 30px 0 0 4rem;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-.modal-container > div {
-  background-color: var(--bg);
-  position: relative;
-  padding: 0.5rem;
-  min-width: 25rem;
-  min-height: 8rem;
-  box-shadow: var(--fg) 0px 0px 230px -50px;
-  animation: pop 0.25s;
-  text-align: center;
-  transition: background-color 0.5s ease;
-}
-.modal-container > div a {
-  display: block;
-  text-decoration: none;
-  margin: 1rem 0;
-}
-.modal-container > div textarea, .modal-container > div input[type=text] {
-  color: var(--fg);
-  border: 1px solid var(--fg-s);
-  padding: 0.5rem;
-  outline: none;
-  width: 100%;
-  background-color: transparent;
-  margin: 0.5rem 0 4rem 0;
-}
-.modal-container > div textarea {
-  resize: vertical;
-  height: 8rem;
-}
-.modal-container > div label {
-  cursor: pointer;
-}
-.modal-container > div > .btn-container2, .modal-container > div > .check-container {
-  position: absolute;
-  left: 0.5rem;
-  bottom: 1rem;
-}
-.modal-container > div .btn3 {
-  margin-right: 0.5rem;
-}
-.modal-container > div .check-container {
-  padding: 0.5rem;
-  bottom: calc(1rem + 1px);
-}
-.modal-container > div .btn-container {
-  position: absolute;
-  right: 0.5rem;
-  bottom: 1rem;
-}
-.modal-container > div .btn1 {
-  margin-right: 0.5rem;
-}
-.modal-container > div input[type=checkbox] {
-  position: relative;
-  height: 0.9rem;
-  margin-left: 0.5rem;
-  width: 1.2rem;
-  cursor: pointer;
-}
-.modal-container > div input[type=checkbox]::before, .modal-container > div input[type=checkbox]:checked::before {
-  content: "";
-  display: block;
-  position: absolute;
-  background-color: var(--bg-s);
-  width: 1.2rem;
-  height: 1.2rem;
-  top: 0;
-  right: 0;
-}
-.modal-container > div input[type=checkbox]:checked::after {
-  content: "";
-  display: block;
-  position: absolute;
-  transform: rotate(45deg);
-  border: solid var(--fg);
-  border-width: 0 2px 2px 0;
-  width: 0.3rem;
-  height: 0.6rem;
-  top: 0.13rem;
-  left: 0.4rem;
+.edit-modal {
+  display: flex;
 }
 
 .select {
@@ -292,8 +292,17 @@ table ol {
   margin: 1.2rem auto 3rem auto;
   width: fit-content;
   border: 1px solid var(--fg-s);
+  user-select: none;
+  transition: 0.25s ease;
+}
+.select:hover {
+  color: var(--bg-s);
+  border-color: var(--bg-s);
 }
 
+.input-fields {
+  margin-top: 1.2rem;
+}
 .input-fields textarea {
   color: var(--fg);
   border: 1px solid var(--fg-s);
@@ -305,11 +314,9 @@ table ol {
   width: calc(98% - 1px);
   margin-bottom: 1rem;
 }
-.input-fields label {
-  cursor: pointer;
-}
 
-.select ~ .btn {
+.btn {
+  display: block;
   margin: 3rem calc(2% + 1px) 3rem auto;
 }
 
@@ -334,11 +341,7 @@ table ol {
   max-height: 200px;
   overflow-y: auto;
 }
-.box ul {
-  list-style-position: inside;
-  word-break: break-word;
-}
-.box ol {
+.box ul, .box ol {
   list-style-position: inside;
   word-break: break-word;
 }
@@ -357,6 +360,12 @@ table ol {
   border: 1px solid var(--fg-s);
   padding: 0.5rem;
   cursor: pointer;
+  user-select: none;
+  transition: 0.25s ease;
+}
+#year-disp:hover {
+  color: var(--bg-s);
+  border-color: var(--bg-s);
 }
 
 @media only screen and (max-width: 929px) {
@@ -369,11 +378,7 @@ table ol {
   text-align: left;
   width: 25rem;
 }
-.timeline-text-space ul {
-  list-style-position: inside;
-  word-break: break-word;
-}
-.timeline-text-space ol {
+.timeline-text-space ul, .timeline-text-space ol {
   list-style-position: inside;
   word-break: break-word;
 }
@@ -400,6 +405,55 @@ table ol {
 
 .finish {
   transform: rotate(-90deg);
+}
+
+.checkboxes {
+  margin: 0.5rem 0 4rem 0;
+}
+.checkboxes .check-container2 {
+  margin: 1rem 0;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.checkboxes .check-container2 > input[type=checkbox] {
+  position: absolute;
+  right: 0.5rem;
+}
+
+.full-page-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.slider-container {
+  flex-direction: column;
+  width: 20%;
+}
+
+.slider-btn-container {
+  display: flex;
+  align-items: center;
+}
+
+#similarityThreshold {
+  appearance: none;
+  width: 100%;
+  height: 1rem;
+  background: var(--bg-s);
+  outline: none;
+  transition: background-color 0.5s ease;
+}
+#similarityThreshold::-webkit-slider-thumb {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  background: var(--fg-s);
+  cursor: pointer;
+  transition: background-color 0.25s ease;
 }
 
 * {
