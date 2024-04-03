@@ -45,6 +45,24 @@ module.exports = async function () {
 		};
 	};
 
+	DB.getIncluded = async function() {
+		return {
+			_abb: await this.db.all('SELECT * FROM _abb'),
+			_col: await this.db.all('SELECT * FROM _col'),
+			ach: await this.db.all('SELECT * FROM ach WHERE is_incld = 1'),
+			coc: await this.db.all('SELECT * FROM coc WHERE is_incld = 1'),
+			edu: await this.db.all('SELECT * FROM edu WHERE is_incld = 1'),
+			exp: await this.db.all('SELECT * FROM exp WHERE is_incld = 1'),
+			ext: await this.db.all('SELECT * FROM ext WHERE is_incld = 1'),
+			int: await this.db.all('SELECT * FROM int WHERE is_incld = 1'),
+			mis: await this.db.all('SELECT * FROM mis WHERE is_incld = 1'),
+			per: await this.db.all('SELECT * FROM per WHERE is_incld = 1'),
+			pro: await this.db.all('SELECT * FROM pro WHERE is_incld = 1'),
+			ski: await this.db.all('SELECT * FROM ski WHERE is_incld = 1'),
+			tra: await this.db.all('SELECT * FROM tra WHERE is_incld = 1'),
+		};
+	};
+
 	DB.getCol = async function(table) {
 		return await this.db.all(`PRAGMA table_info(${table})`);
 	};

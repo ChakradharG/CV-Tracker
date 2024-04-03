@@ -17,6 +17,8 @@
 }
 
 .input-fields {
+	margin-top: 1.2rem;
+
 	textarea {
 		color: $fg;
 		border: 1px solid $fg-s;
@@ -30,6 +32,7 @@
 	}
 }
 
-.select ~ .btn {
+.btn {
+	display: block;
 	margin: 3rem calc(2% + 1px) 3rem auto;
 }

@@ -340,7 +340,7 @@ function constructSection(element, heading, collapsibleColumn) {
 
 	let hRow = document.createElement('tr');	// Head
 	Object.keys(rows[0]).forEach((key) => {
-		if (key === 'id' || key === 'rowSpan' || key === 'embedding' || key === 'is_incld' || key === 'recomp') {
+		if (key === 'id' || key === 'rowSpan' || key === 'embedding' || key === 'is_incld' || key === 'recomp' || key === 'similarity') {
 			return;
 		}
 		let _ = document.createElement('th');
@@ -368,7 +368,7 @@ function constructSection(element, heading, collapsibleColumn) {
 		bRow.id = element[0] + row['id'];
 		Object.entries(row).forEach(([ key, value ]) => {
 			let _ = document.createElement('td');
-			if (key === 'id' || key === 'rowSpan' || key === 'embedding' || key === 'is_incld' || key === 'recomp') {
+			if (key === 'id' || key === 'rowSpan' || key === 'embedding' || key === 'is_incld' || key === 'recomp' || key === 'similarity') {
 				return;
 			} else if (key === collapsibleColumn) {
 				if (row.rowSpan === 0) {

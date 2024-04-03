@@ -4,6 +4,7 @@ const path = require('path');
 const { OpenAI } = require('openai');
 
 require('./database/helpers')().then((_DB) => { global.DB = _DB });
+const client = new OpenAI({baseURL: 'http://localhost:11434/v1', apiKey: 'ollama'});
 
 
 let win;
@@ -44,12 +45,11 @@ async function exportTables(content) {
 async function computeEmbeddings() {
 	try {
 		const pendingDB = await DB.getPending();
-		const openai = new OpenAI({baseURL: 'http://localhost:11434/v1', apiKey: 'ollama'});
 
 		for (let table in pendingDB) {
 			let column = table === 'ski' ? 'Skill' : 'Description';
 			for (let row of pendingDB[table]) {
-				let embedding = await openai.embeddings.create({
+				let embedding = await client.embeddings.create({
 					model: 'nomic-embed-text',	// if you change this, make sure to manually set `recomp` flag for all rows in the database
 					input: [row[column]]
 				});
@@ -61,7 +61,7 @@ async function computeEmbeddings() {
 					column: 'embedding',
 					id: row['id'],
 					collapsibleColumn: '',	// need the key, not the value
-					newValue: `'${JSON.stringify(embedding.data[0].embedding)}'`
+					newValue: `${JSON.stringify(embedding.data[0].embedding)}`
 				});
 				// Reset the `recomp` flag
 				await DB.update({
@@ -79,6 +79,52 @@ async function computeEmbeddings() {
 	} catch (error) {
 		console.log(error);
 		return 1;
+	}
+}
+
+async function computeCosineSimilarity(embedding1, embedding2) {
+	const n = embedding1.length;
+	if (n !== embedding2.length) {
+		throw new Error('Embeddings must have the same length');
+	}
+
+	let dotProd = 0;
+	let norm1 = 0;
+	let norm2 = 0;
+	for (let i = 0; i < n; i++) {
+		dotProd += embedding1[i] * embedding2[i];
+		norm1 += embedding1[i] ** 2;
+		norm2 += embedding2[i] ** 2;
+	}
+	return dotProd / (norm1 * norm2);
+}
+
+async function getSimilarities(content) {
+	try {
+		const partialDB = await DB.getIncluded();
+		const targetEmbedding = (await client.embeddings.create({
+			model: 'nomic-embed-text',
+			input: [content]
+		})).data[0].embedding;
+
+		for (let table in partialDB) {
+			if (table.startsWith('_')) {
+				continue;
+			}
+
+			for (let row of partialDB[table]) {
+				let similarity = await computeCosineSimilarity(
+					targetEmbedding,
+					JSON.parse(row['embedding'])
+				);
+				row['similarity'] = similarity;
+			}
+		}
+
+		return partialDB;
+	} catch (error) {
+		console.log(error);
+		return {};
 	}
 }
 
@@ -114,6 +160,10 @@ ipcMain.handle('getColumns', (_, payLoad) => {
 
 ipcMain.handle('computeEmbeddings', () => {
 	return computeEmbeddings();
+});
+
+ipcMain.handle('getSimilarities', (_, payLoad) => {
+	return getSimilarities(JSON.parse(payLoad).content);
 });
 
 ipcMain.on('postData', (_, payLoad) => {
