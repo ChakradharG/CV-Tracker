@@ -37,11 +37,35 @@
 		window.addEventListener('keydown', (ev) => {
 			if (ev.key === 'Escape') {
 				closeModals();
-			}
-		});
-		window.addEventListener('keydown', (ev) => {
-			if (ev.ctrlKey && ev.key === 'f') {
-				renderFindTab();
+			} else if (ev.ctrlKey) {
+				switch (ev.key) {
+					case 'f':
+						renderFindTab();
+						break;
+					case 't':
+						toggleTheme();
+						break;
+					case '1':
+						renderHomeTab();
+						break;
+					case '2':
+						renderTimelineTab();
+						break;
+					case '3':
+						renderAddTab();
+						break;
+					case '4':
+						renderApplyTab();
+						break;
+					case '5':
+						renderFindTab();
+						break;
+					case '0':
+						renderExportTab();
+						break;
+					default:
+						break;
+				}
 			}
 		});
 	</script>
